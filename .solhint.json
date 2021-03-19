@@ -1,0 +1,11 @@
+{
+  "extends": "solhint:recommended",
+  "rules": {
+    "compiler-version": ["error", "^0.8.2"],
+    "quotes": ["error", "single"],
+    "ordering": "error",
+    "constructor-syntax": "error",
+    "modifier-name-mixedcase": "error",
+    "func-param-name-mixedcase": "error"
+  }
+}

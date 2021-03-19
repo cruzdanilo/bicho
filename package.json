@@ -1,0 +1,66 @@
+{
+  "name": "bicho",
+  "version": "0.0.1",
+  "description": "jogo do bicho",
+  "contributors": [
+    "danilo neves cruz <cruzdanilo@gmail.com> (https://cruzdanilo.com)",
+    "Dalton Onliveira <dalton.oliveira.84@gmail.com>",
+    "danilo neves cruz <bronzelle@gmail.com>"
+  ],
+  "license": "UNLICENSED",
+  "private": true,
+  "main": "ecs/game.ts",
+  "scripts": {
+    "start": "dcl start",
+    "build": "build-ecs",
+    "watch": "build-ecs --watch",
+    "lint": "run-s --continue-on-error lint:**",
+    "lint:es": "eslint --ext .ts,.js --ignore-path .gitignore .",
+    "lint:sol": "cross-env TS_NODE_PROJECT=tsconfig.tools.json hardhat check",
+    "test": "cross-env TS_NODE_PROJECT=tsconfig.tools.json hardhat test",
+    "build:contracts": "cross-env TS_NODE_PROJECT=tsconfig.tools.json hardhat compile",
+    "deploy:now": "dcl export && now export"
+  },
+  "engines": {
+    "node": ">=15",
+    "yarn": "^1"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.0.0-rc.0"
+  },
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@nomiclabs/hardhat-solhint": "^2.0.0",
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "@types/chai": "^4.2.15",
+    "@types/eslint": "^7.2.7",
+    "@types/mocha": "^8.2.1",
+    "@types/node": "^14.14.35",
+    "@typescript-eslint/eslint-plugin": "^4.18.0",
+    "chai": "^4.3.4",
+    "cross-env": "^7.0.3",
+    "decentraland": "next",
+    "decentraland-ecs": "next",
+    "dotenv": "^8.2.0",
+    "eslint": "^7.22.0",
+    "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-plugin-chai-expect": "^2.2.0",
+    "eslint-plugin-chai-friendly": "^0.6.0",
+    "eslint-plugin-eslint-comments": "^3.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-mocha": "^8.1.0",
+    "eslint-plugin-node": "^11.1.0",
+    "ethereum-waffle": "^3.3.0",
+    "ethers": "^5.0.32",
+    "hardhat": "^2.1.1",
+    "npm-run-all": "^4.1.5",
+    "solc": "^0.8.2",
+    "solhint": "^3.3.4",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.3"
+  },
+  "resolutions": {
+    "solc": "^0.8.2",
+    "solhint": "^3.3.4"
+  }
+}

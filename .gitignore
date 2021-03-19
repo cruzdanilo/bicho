@@ -1,0 +1,11 @@
+.vscode/
+artifacts/
+bin/
+build/
+cache/
+node_modules/
+.DS_Store
+.env
+Thumbs.db
+package-lock.json
+*.log
