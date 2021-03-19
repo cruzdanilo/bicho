@@ -8,6 +8,8 @@ contract Bicho is ERC1155('https://bicho-nft.web.app/bicho/{id}.json') {
   event Birth(uint number);
 
   function breed() public {
-    emit Birth(uint(blockhash(block.number - 1)));
+    uint number = uint(blockhash(block.number - 1));
+    _mint(msg.sender, number, 1, '');
+    emit Birth(number);
   }
 }
