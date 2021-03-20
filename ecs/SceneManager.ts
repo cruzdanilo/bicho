@@ -1,6 +1,5 @@
-import { Web3Provider } from '@ethersproject/providers';
 import {
-  ISystem, Transform, UICanvas, Vector3, engine,
+  ISystem, Transform, UICanvas, engine,
 } from 'decentraland-ecs';
 import TicketMenu from './TicketMenu';
 import BichoMenu from './BichoMenu';
@@ -8,7 +7,7 @@ import BancaModel from './BancaModel';
 import BichoModel from './BichoModel';
 
 export default class SceneManager implements ISystem {
-  onBuyWishEvent: (bicho: number, ticket: number, ethers: Web3Provider) => void;
+  onBuyWishEvent: (bicho: number, ticket: number) => void;
 
   bichoMenu: BichoMenu;
 
@@ -24,7 +23,7 @@ export default class SceneManager implements ISystem {
     this.showingMenu = false;
   }
 
-  constructor(onBuyWishEvent: (bicho: number, ticket: number, ethers: Web3Provider) => void) {
+  constructor(onBuyWishEvent: (bicho: number, ticket: number) => void) {
     this.onBuyWishEvent = onBuyWishEvent;
     this.group = engine.getComponentGroup(Transform);
     const ticketCanvas = new UICanvas();
