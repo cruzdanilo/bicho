@@ -1,3 +1,5 @@
+import { Web3Provider } from '@ethersproject/providers';
+import detectEthereumProvider from '@metamask/detect-provider';
 import {
   ISystem, Transform, UICanvas, Vector3, engine,
 } from 'decentraland-ecs';
@@ -7,7 +9,7 @@ import BancaModel from './BancaModel';
 import BichoModel from './BichoModel';
 
 export default class SceneManager implements ISystem {
-  onBuyWishEvent: (bicho: number, ticket: number) => void;
+  onBuyWishEvent: (bicho: number, ticket: number, ethers: Web3Provider) => void;
 
   bichoMenu: BichoMenu;
 
@@ -19,11 +21,13 @@ export default class SceneManager implements ISystem {
 
   mainBanca: BancaModel;
 
+  ethers: Web3Provider;
+
   onCloseMenu() {
     this.showingMenu = false;
   }
 
-  constructor(onBuyWishEvent: (bicho: number, ticket: number) => void) {
+  constructor(onBuyWishEvent: (bicho: number, ticket: number, ethers: Web3Provider) => void) {
     this.onBuyWishEvent = onBuyWishEvent;
     this.group = engine.getComponentGroup(Transform);
     const ticketCanvas = new UICanvas();
@@ -32,7 +36,7 @@ export default class SceneManager implements ISystem {
     this.ticketMenu = new TicketMenu(ticketCanvas, (bicho: number, ticket: number) => {
       this.showingMenu = false;
       this.ticketMenu.visible = false;
-      this.onBuyWishEvent(bicho, ticket);
+      this.onBuyWishEvent(bicho, ticket, this.ethers);
       if (!this.mainBanca) {
         for (const entity of this.group.entities) {
           if (entity instanceof BancaModel) {
@@ -50,6 +54,8 @@ export default class SceneManager implements ISystem {
     this.bichoMenu.addOnClose(() => this.onCloseMenu());
 
     this.showingMenu = false;
+
+    detectEthereumProvider().then((ethereum) => { this.ethers = new Web3Provider(ethereum); });
   }
 
   public start() {
