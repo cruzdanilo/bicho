@@ -1,6 +1,5 @@
 import {
-  Color4,
-  OnClick, Texture, UICanvas, UIContainerRect, UIImage, UIScrollRect, UIText
+  Color4, OnClick, UICanvas, UIContainerRect, UIImage, UIText,
 } from 'decentraland-ecs';
 import Bichos from './Bichos';
 import Menu from './Menu';

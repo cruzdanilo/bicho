@@ -1,6 +1,5 @@
 import {
-  BoxShape,
-  Entity, Material, OnClick, SphereShape, Transform, Vector3,
+  BoxShape, Entity, Material, OnClick, Transform, Vector3,
 } from 'decentraland-ecs';
 import Bichos from './Bichos';
 
