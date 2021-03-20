@@ -13,7 +13,6 @@ export default class SceneManager implements ISystem {
   showingMenu: boolean;
 
   onCloseMenu() {
-    console.log(`Menu era ${this.showingMenu} e vai ser falso`);
     this.showingMenu = false;
   }
 
@@ -26,14 +25,21 @@ export default class SceneManager implements ISystem {
       this.showingMenu = false;
       this.ticketMenu.visible = false;
       this.onBuyWishEvent(bicho, ticket);
+      if (this.mainBanca !== undefined) {
+        for (const entity of this.group.entities) {
+          if (entity instanceof BancaModel) {
+            (entity as BancaModel).setCountdown(2000);
+          }
+        }
+      }
     });
-    this.ticketMenu.addOnClose(()=>this.onCloseMenu());
+    this.ticketMenu.addOnClose(() => this.onCloseMenu());
 
     this.bichoMenu = new BichoMenu(bichoCanvas, (bicho: number) => {
       this.bichoMenu.visible = false;
       this.ticketMenu.show(bicho);
     });
-    this.bichoMenu.addOnClose(()=>this.onCloseMenu());
+    this.bichoMenu.addOnClose(() => this.onCloseMenu());
 
     this.showingMenu = false;
   }
@@ -58,13 +64,14 @@ export default class SceneManager implements ISystem {
   public spawnBanca(x: number = 0, y: number = 0, z: number = 0) {
     const banca = new BancaModel(x, y, z);
     engine.addEntity(banca);
-    banca.addComponent(new OnClick(() => {
+    banca.addOnTicketWishBuy(() => {
       if (!this.showingMenu) {
         this.showingMenu = true;
         this.bichoMenu.visible = true;
         this.bichoMenu.isPointerBlocker = true;
       }
-    }));
+    });
+    this.mainBanca = banca;
   }
 
   group = engine.getComponentGroup(Transform);
@@ -73,6 +80,9 @@ export default class SceneManager implements ISystem {
     for (const entity of this.group.entities) {
       const transform = entity.getComponent(Transform);
       transform.rotate(Vector3.Up(), dt * 10);
+      if (entity instanceof BancaModel) {
+        (entity as BancaModel).update(dt);
+      }
     }
   }
 }
