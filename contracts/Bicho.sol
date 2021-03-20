@@ -2,7 +2,6 @@
 pragma solidity ^0.8.2;
 
 import { ERC1155 } from '@openzeppelin/contracts/token/ERC1155/ERC1155.sol';
-import { console } from 'hardhat/console.sol';
 contract Bicho is ERC1155('https://bicho-nft.web.app/bicho/{id}.json') {
   struct Ticket {
     address player;
@@ -10,12 +9,12 @@ contract Bicho is ERC1155('https://bicho-nft.web.app/bicho/{id}.json') {
     uint256 amount;
     uint256 wonShare;
   }
-  uint constant private EXPECTED_INTERVAL = 20 minutes;
-  uint constant private AVG_BLOCK_TIME = 13 seconds;
-  uint constant private BLOCK_INTERVAL = EXPECTED_INTERVAL/AVG_BLOCK_TIME;
+  uint constant public EXPECTED_INTERVAL = 20 minutes;
+  uint constant public AVG_BLOCK_TIME = 13 seconds;
+  uint constant public BLOCK_INTERVAL = EXPECTED_INTERVAL/AVG_BLOCK_TIME;
   uint8 constant private MAX_NUMS = 25;
   uint private currentRound = 0;
-  uint private start;
+  uint public start;
   Ticket[] public tickets;
   Ticket[] public redeemList;
   uint256[MAX_NUMS] public sumsByNumber;
