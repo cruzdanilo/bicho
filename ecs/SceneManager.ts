@@ -1,5 +1,4 @@
 import { Web3Provider } from '@ethersproject/providers';
-import detectEthereumProvider from '@metamask/detect-provider';
 import {
   ISystem, Transform, UICanvas, Vector3, engine,
 } from 'decentraland-ecs';
@@ -50,8 +49,6 @@ export default class SceneManager implements ISystem {
     this.bichoMenu.addOnClose(() => this.onCloseMenu());
 
     this.showingMenu = false;
-
-    detectEthereumProvider().then((ethereum) => { this.ethers = new Web3Provider(ethereum); });
   }
 
   public start() {
