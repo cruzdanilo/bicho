@@ -7,6 +7,10 @@ export default class BichoButton extends UIImage {
   constructor(bichoMenu: UIShape, bicho: number, x: number, y: number,
     onClickImage: (bicho: number) => void) {
     super(bichoMenu, Bichos.getBichoTexture(bicho));
+    this.sourceLeft = 0;
+    this.sourceTop = 0;
+    this.sourceWidth = 100;
+    this.sourceHeight = 100;
     this.bicho = bicho;
     this.hAlign = 'left';
     this.vAlign = 'top';

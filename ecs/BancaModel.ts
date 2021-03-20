@@ -1,5 +1,5 @@
 import {
-  BoxShape, Color3, Entity, OnClick, TextShape, Transform, Vector3, engine,
+  BoxShape, Color3, Entity, OnClick, TextShape, Transform, Vector3, engine, Texture, Material,
 } from 'decentraland-ecs';
 
 export default class BancaModel extends Entity {
@@ -15,6 +15,12 @@ export default class BancaModel extends Entity {
     super();
     this.addComponent(new Transform({ position: new Vector3(x, y, z) }));
     this.addComponent(new BoxShape());
+
+    const bancaMaterial = new Material();
+    bancaMaterial.albedoTexture = new Texture('https://dummyimage.com/100x100/ffd700/000000.png&text=BET');
+
+    this.addComponent(bancaMaterial);
+
     this.counterOn = false;
   }
 

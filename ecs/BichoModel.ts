@@ -16,14 +16,14 @@ export default class BichoModel extends Entity {
     this.addComponent(new BoxShape());
 
     const bichoMaterial = new Material();
-    bichoMaterial.albedoColor = Bichos.getBichoColor(bicho);
+    bichoMaterial.albedoTexture = Bichos.getBichoTexture(bicho);
     bichoMaterial.metallic = 0.9;
     bichoMaterial.roughness = 0.1;
 
     this.addComponent(bichoMaterial);
   }
 
-  addOnBichoPicked(onBichoPicked: (bicho: BichoModel)=> void) {
+  addOnBichoPicked(onBichoPicked: (bicho: BichoModel) => void) {
     this.onBichoPicked = onBichoPicked;
     this.addComponent(new OnClick(() => this.onBichoPicked(this)));
   }

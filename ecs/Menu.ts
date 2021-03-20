@@ -42,7 +42,11 @@ export default class Menu extends UIContainerRect {
 
     this.visible = false;
 
-    const closeButton = new UIImage(titleBar, new Texture('https://via.placeholder.com/64'));
+    const closeButton = new UIImage(titleBar, new Texture('https://dummyimage.com/10x10/000000/C0C0C0.png&text=X'));
+    closeButton.sourceLeft = 0;
+    closeButton.sourceTop = 0;
+    closeButton.sourceWidth = 100;
+    closeButton.sourceHeight = 100;
     closeButton.hAlign = 'right';
     closeButton.vAlign = 'center';
     closeButton.height = 10;
