@@ -40,9 +40,15 @@ export default class BancaModel extends Entity {
   }
 
   update(dt: number) {
+    if (this.counterModel) {
+      const transform = this.counterModel.getComponent(Transform);
+      transform.rotate(Vector3.Up(), dt * 10);
+    }
+
     if (this.counterOn && this.counterModel !== undefined) {
       const countNow = Math.floor(Date.now() / 1000);
       const count = this.countFinal - countNow;
+
       if (count >= 0) {
         this.counterModel.getComponent(TextShape).value = count.toString();
       } else {

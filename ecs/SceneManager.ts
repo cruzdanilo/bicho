@@ -21,8 +21,6 @@ export default class SceneManager implements ISystem {
 
   mainBanca: BancaModel;
 
-  ethers: Web3Provider;
-
   onCloseMenu() {
     this.showingMenu = false;
   }
@@ -36,12 +34,10 @@ export default class SceneManager implements ISystem {
     this.ticketMenu = new TicketMenu(ticketCanvas, (bicho: number, ticket: number) => {
       this.showingMenu = false;
       this.ticketMenu.visible = false;
-      this.onBuyWishEvent(bicho, ticket, this.ethers);
-      if (!this.mainBanca) {
-        for (const entity of this.group.entities) {
-          if (entity instanceof BancaModel) {
-            (entity as BancaModel).setCountdown(2000);
-          }
+      this.onBuyWishEvent(bicho, ticket);
+      for (const entity of this.group.entities) {
+        if (entity instanceof BancaModel) {
+          (entity as BancaModel).setCountdown(2000);
         }
       }
     });
@@ -85,13 +81,12 @@ export default class SceneManager implements ISystem {
         this.bichoMenu.isPointerBlocker = true;
       }
     });
-    this.mainBanca = banca;
   }
 
   update(dt: number) {
     for (const entity of this.group.entities) {
-      const transform = entity.getComponent(Transform);
-      transform.rotate(Vector3.Up(), dt * 10);
+      // const transform = entity.getComponent(Transform);
+      // transform.rotate(Vector3.Up(), dt * 10);
       if (entity instanceof BancaModel) {
         (entity as BancaModel).update(dt);
       }

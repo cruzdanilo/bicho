@@ -1,4 +1,5 @@
 import {
+  BoxShape,
   Entity, Material, OnClick, SphereShape, Transform, Vector3,
 } from 'decentraland-ecs';
 import Bichos from './Bichos';
@@ -12,7 +13,7 @@ export default class BichoModel extends Entity {
     super();
     this.bicho = bicho;
     this.addComponent(new Transform({ position: new Vector3(x, y, z) }));
-    this.addComponent(new SphereShape());
+    this.addComponent(new BoxShape());
 
     const bichoMaterial = new Material();
     bichoMaterial.albedoColor = Bichos.getBichoColor(bicho);
