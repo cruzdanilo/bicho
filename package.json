@@ -11,10 +11,11 @@
   "private": true,
   "main": "ecs/main.ts",
   "scripts": {
+    "prestart": "npm run build:contracts",
     "start": "run-p start:**",
     "start:dcl": "wait-on dist/main.js && dcl start",
     "start:build": "cross-env TS_NODE_PROJECT=tsconfig.tools.json webpack --mode development --watch",
-    "ci:start": "run-p ci:start:*",
+    "ci:start": "npm run prestart && run-p ci:start:*",
     "ci:start:dcl": "npm run start:dcl -- --ci",
     "ci:start:build": "npm run start:build",
     "build": "cross-env TS_NODE_PROJECT=tsconfig.tools.json webpack --mode production",

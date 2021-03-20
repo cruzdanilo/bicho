@@ -1,14 +1,17 @@
 import { Contract } from '@ethersproject/contracts';
 import { Web3Provider } from '@ethersproject/providers';
-import IERC20 from '@openzeppelin/contracts/build/contracts/IERC20.json';
+// @ts-ignore
+import Bicho from '../artifacts/contracts/Bicho.sol/Bicho.json';
 import SceneManager from './SceneManager';
+
+declare const BICHO_ADDRESS: string;
 
 const sceneManager = new SceneManager(async (
   bicho: number, ticket: number, ethers: Web3Provider,
 ) => {
   console.log(`ticket ${ticket} for bicho ${bicho}`);
-  const mana = new Contract('0x2a8Fd99c19271F4F04B1B7b9c4f7cF264b626eDB', IERC20.abi, ethers);
-  console.log(await mana.totalSupply());
+  const contract = new Contract(BICHO_ADDRESS, Bicho.abi, ethers);
+  console.log(await contract.bet(bicho, 1));
 });
 
 sceneManager.spawnBanca(8, 1, 8);
