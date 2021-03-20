@@ -1,3 +1,4 @@
+import Bichos from './Bichos'
 
 export default class BichoModel extends Entity {
   onBichoPicked: (bicho: BichoModel) => void;
@@ -8,7 +9,15 @@ export default class BichoModel extends Entity {
     super();
     this.bicho = bicho;
     this.addComponent(new Transform({ position: new Vector3(x, y, z) }));
-    this.addComponent(new BoxShape());
+    this.addComponent(new SphereShape());
+
+    const bichoMaterial = new Material();
+    bichoMaterial.albedoColor = Bichos.getBichoColor(bicho);
+    bichoMaterial.metallic = 0.9;
+    bichoMaterial.roughness = 0.1;
+
+    this.addComponent(bichoMaterial);
+
   }
 
   addOnBichoPicked(onBichoPicked: (bicho: BichoModel)=> void) {

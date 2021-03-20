@@ -27,13 +27,13 @@ export default class SceneManager implements ISystem {
       this.ticketMenu.visible = false;
       this.onBuyWishEvent(bicho, ticket);
     });
-    this.ticketMenu.addOnClose(this.onCloseMenu);
+    this.ticketMenu.addOnClose(()=>this.onCloseMenu());
 
     this.bichoMenu = new BichoMenu(bichoCanvas, (bicho: number) => {
       this.bichoMenu.visible = false;
       this.ticketMenu.show(bicho);
     });
-    this.bichoMenu.addOnClose(this.onCloseMenu);
+    this.bichoMenu.addOnClose(()=>this.onCloseMenu());
 
     this.showingMenu = false;
   }
