@@ -1,4 +1,7 @@
-class RotatorSystem {
+import TicketMenu from './TicketMenu';
+import BichoMenu from './BichoMenu';
+
+class RotatorSystem implements ISystem {
   group = engine.getComponentGroup(Transform);
 
   update(dt: number) {
@@ -21,9 +24,21 @@ function spawnCube(x: number, y: number, z: number) {
 
 const cube = spawnCube(8, 1, 8);
 
-cube.addComponent(new OnClick(() => {
-  cube.getComponent(Transform).scale.z *= 1.1;
-  cube.getComponent(Transform).scale.x *= 0.9;
+const ticketCanvas = new UICanvas();
+const ticketMenu = new TicketMenu(ticketCanvas, (bicho: number, ticket: number) => {
+  console.log(`Ticket escolhido ${ticket} para o bicho ${bicho}`);
+});
+ticketMenu.visible = false;
 
-  spawnCube(Math.random() * 8 + 1, Math.random() * 8, Math.random() * 8 + 1);
+const bichoCanvas = new UICanvas();
+const bichoMenu = new BichoMenu(bichoCanvas, (bicho: number) => {
+  bichoMenu.visible = false;
+  ticketMenu.show(bicho);
+});
+bichoMenu.visible = false;
+
+cube.addComponent(new OnClick(() => {
+  bichoMenu.visible = true;
+  bichoMenu.isPointerBlocker = true;
 }));
+
