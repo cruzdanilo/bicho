@@ -1,8 +1,9 @@
-import BichoButton from './BichoButton'
-import Menu from './Menu'
+import BichoButton from './BichoButton';
+import Menu from './Menu';
 
 export default class BichoMenu extends Menu {
   onClickImage: (bicho: number) => void
+
   constructor(bichoCanvas: UICanvas, onClickImage: (bicho: number) => void) {
     super(bichoCanvas, "560", "560", "Pick a Bicho");
     this.__proto__ = BichoMenu.prototype;
@@ -13,6 +14,7 @@ export default class BichoMenu extends Menu {
   }
 
   addBicho(x: number, y: number, bicho: number) {
-    new BichoButton(this, bicho, 110 * x + 10, -110 * y - 10, this.onClickImage);
+    const bichoButton = new BichoButton(this, bicho, 110 * x + 10, -110 * y - 10,
+      this.onClickImage);
   }
 }
