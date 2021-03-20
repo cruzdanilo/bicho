@@ -30,8 +30,8 @@
     "yarn": "^1"
   },
   "dependencies": {
+    "@ethersproject/contracts": "^5.0.12",
     "@ethersproject/providers": "^5.0.24",
-    "@metamask/detect-provider": "^1.2.0",
     "@openzeppelin/contracts": "^4.0.0-rc.0",
     "core-js": "^3.9.1",
     "decentraland-ecs": "^6.6.4"
