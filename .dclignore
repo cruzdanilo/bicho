@@ -1,14 +1,12 @@
 .*
 package.json
-package-lock.json
-yarn-lock.json
+yarn.lock
 build.json
 export
 tsconfig.json
-tslint.json
+tsconfig.*.json
 node_modules
 *.ts
-*.tsx
 Dockerfile
 dist
 README.md

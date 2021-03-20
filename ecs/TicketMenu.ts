@@ -1,3 +1,6 @@
+import {
+  OnClick, Texture, UICanvas, UIImage,
+} from 'decentraland-ecs';
 import Menu from './Menu';
 import Bichos from './Bichos';
 
@@ -11,7 +14,7 @@ export default class TicketMenu extends Menu {
   constructor(ticketCanvas: UICanvas, onClickTicket: (bicho: number, ticket: number) => void) {
     super(ticketCanvas, '280', '500', 'Pick the best bet');
 
-    this.__proto__ = TicketMenu.prototype;
+    Object.setPrototypeOf(this, TicketMenu.prototype);
 
     this.onClickTicket = onClickTicket;
     this.image = new UIImage(this, Bichos.getBichoTexture(0));
@@ -21,19 +24,13 @@ export default class TicketMenu extends Menu {
     this.image.width = '200';
     this.image.height = '200';
 
-    this.ticket(-30).onClick = new OnClick(() => {
-      onClickTicket(this.bicho, 0);
-    });
-    this.ticket(-110).onClick = new OnClick(() => {
-      onClickTicket(this.bicho, 1);
-    });
-    this.ticket(-190).onClick = new OnClick(() => {
-      onClickTicket(this.bicho, 2);
-    });
+    this.ticket(-30).onClick = new OnClick(() => onClickTicket(this.bicho, 0));
+    this.ticket(-110).onClick = new OnClick(() => onClickTicket(this.bicho, 1));
+    this.ticket(-190).onClick = new OnClick(() => onClickTicket(this.bicho, 2));
   }
 
   ticket(y: number) {
-    const ticketButton = new UIImage(this, new Texture("ticket1.png"));
+    const ticketButton = new UIImage(this, new Texture('ticket1.png'));
     ticketButton.hAlign = 'center';
     ticketButton.vAlign = 'center';
     ticketButton.width = '100';

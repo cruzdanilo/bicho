@@ -1,6 +1,7 @@
 .vscode/
 artifacts/
 bin/
+dist/
 build/
 cache/
 node_modules/

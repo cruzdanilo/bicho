@@ -1,4 +1,7 @@
-import Bichos from './Bichos'
+import {
+  Entity, Material, OnClick, SphereShape, Transform, Vector3,
+} from 'decentraland-ecs';
+import Bichos from './Bichos';
 
 export default class BichoModel extends Entity {
   onBichoPicked: (bicho: BichoModel) => void;
@@ -17,13 +20,10 @@ export default class BichoModel extends Entity {
     bichoMaterial.roughness = 0.1;
 
     this.addComponent(bichoMaterial);
-
   }
 
   addOnBichoPicked(onBichoPicked: (bicho: BichoModel)=> void) {
     this.onBichoPicked = onBichoPicked;
-    this.addComponent(new OnClick(() => {
-      this.onBichoPicked(this);
-    });
+    this.addComponent(new OnClick(() => this.onBichoPicked(this)));
   }
 }

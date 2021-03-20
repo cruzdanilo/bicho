@@ -9,11 +9,12 @@
   ],
   "license": "UNLICENSED",
   "private": true,
-  "main": "ecs/game.ts",
+  "main": "ecs/main.ts",
   "scripts": {
-    "start": "dcl start",
-    "build": "build-ecs",
-    "watch": "build-ecs --watch",
+    "start": "run-p start:**",
+    "start:dcl": "wait-on dist/main.js && dcl start",
+    "start:build": "cross-env TS_NODE_PROJECT=tsconfig.tools.json webpack --mode development --watch",
+    "build": "cross-env TS_NODE_PROJECT=tsconfig.tools.json webpack --mode production",
     "lint": "run-s --continue-on-error lint:**",
     "lint:es": "eslint --ext .ts,.js --ignore-path .gitignore .",
     "lint:sol": "cross-env TS_NODE_PROJECT=tsconfig.tools.json hardhat check",
@@ -26,22 +27,32 @@
     "yarn": "^1"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "^4.0.0-rc.0"
+    "@ethersproject/providers": "^5.0.24",
+    "@metamask/detect-provider": "^1.2.0",
+    "@openzeppelin/contracts": "^4.0.0-rc.0",
+    "core-js": "^3.9.1",
+    "decentraland-ecs": "^6.6.4"
   },
   "devDependencies": {
+    "@babel/core": "^7.13.10",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/preset-env": "^7.13.10",
+    "@babel/preset-typescript": "^7.13.0",
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@nomiclabs/hardhat-solhint": "^2.0.0",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "@types/babel__core": "^7.1.14",
     "@types/chai": "^4.2.15",
     "@types/eslint": "^7.2.7",
     "@types/mocha": "^8.2.2",
     "@types/node": "^14.14.35",
+    "@types/webpack": "^4.41.26",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
+    "babel-loader": "^8.2.2",
     "chai": "^4.3.4",
     "cross-env": "^7.0.3",
     "decentraland": "^3.4.9",
-    "decentraland-ecs": "^6.6.4",
     "dotenv": "^8.2.0",
     "eslint": "^7.22.0",
     "eslint-config-airbnb-typescript": "^12.3.1",
@@ -58,7 +69,10 @@
     "solc": "^0.8.2",
     "solhint": "^3.3.4",
     "ts-node": "^9.1.1",
-    "typescript": "^4.2.3"
+    "typescript": "^4.2.3",
+    "wait-on": "^5.3.0",
+    "webpack": "^5.27.0",
+    "webpack-cli": "^4.5.0"
   },
   "resolutions": {
     "decentraland-ecs": "^6.6.4",

@@ -1,7 +1,7 @@
-import SceneManager from './SceneManager'
+import SceneManager from './SceneManager';
 
 const sceneManager = new SceneManager((bicho: number, ticket: number) => {
-  console.log(`Ticket escolhido ${ticket} para o bicho ${bicho}`);
+  console.log(`ticket ${ticket} for bicho ${bicho}`);
 });
 
 sceneManager.spawnBanca(5, 1, 5);

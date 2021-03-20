@@ -1,4 +1,7 @@
 
+import {
+  Color4, OnClick, Texture, UICanvas, UIContainerRect, UIImage, UIText,
+} from 'decentraland-ecs';
 
 export default class Menu extends UIContainerRect {
   menuCanvas: UICanvas;
@@ -12,7 +15,7 @@ export default class Menu extends UIContainerRect {
     super(menuCanvas);
     this.menuCanvas = menuCanvas;
     this.color = Color4.Black();
-    this.opacity = 0.8
+    this.opacity = 0.8;
     this.width = width;
     this.height = height;
     this.adaptHeight = false;
@@ -39,7 +42,7 @@ export default class Menu extends UIContainerRect {
 
     this.visible = false;
 
-    const closeButton = new UIImage(titleBar, new Texture("https://via.placeholder.com/64"));
+    const closeButton = new UIImage(titleBar, new Texture('https://via.placeholder.com/64'));
     closeButton.hAlign = 'right';
     closeButton.vAlign = 'center';
     closeButton.height = 10;
@@ -55,7 +58,7 @@ export default class Menu extends UIContainerRect {
   }
 
   setTitle(title: number) {
-    this.text.value = "Bicho: " + title;
+    this.text.value = `Bicho: ${title}`;
   }
 
   addOnClose(onClose: ()=>void) {

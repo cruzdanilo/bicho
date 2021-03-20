@@ -1,3 +1,4 @@
+import { UIImage, UIShape, OnClick } from 'decentraland-ecs';
 import Bichos from './Bichos';
 
 export default class BichoButton extends UIImage {
@@ -13,8 +14,6 @@ export default class BichoButton extends UIImage {
     this.height = '100';
     this.positionX = x;
     this.positionY = y;
-    this.onClick = new OnClick(() => {
-      onClickImage(bicho);
-    });
+    this.onClick = new OnClick(() => onClickImage(bicho));
   }
 }

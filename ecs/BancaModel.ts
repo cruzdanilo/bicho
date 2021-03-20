@@ -1,5 +1,14 @@
+import {
+  BoxShape, Color3, Entity, OnClick, TextShape, Transform, Vector3, engine,
+} from 'decentraland-ecs';
 
 export default class BancaModel extends Entity {
+  countFinal: number = 2000;
+
+  counterModel?: Entity;
+
+  counterOn: boolean;
+
   onTicketWishBuy: () => void;
 
   constructor(x: number = 0, y: number = 0, z: number = 0) {
@@ -11,21 +20,11 @@ export default class BancaModel extends Entity {
 
   addOnTicketWishBuy(onTicketWishBuy: () => void) {
     this.onTicketWishBuy = onTicketWishBuy;
-    this.addComponent(new OnClick(() => {
-      if (this.onTicketWishBuy !== undefined) {
-        this.onTicketWishBuy();
-      }
-    });
-
+    this.addComponent(new OnClick(() => this?.onTicketWishBuy()));
   }
 
-  countFinal: number = 2000;
-  counterModel: Entity | undefined;
-  counterOn: boolean;
-
   setCountdown(timeToEventInSec: number) {
-    if (this.counterOn)
-      return;
+    if (this.counterOn) return;
     this.counterModel = new Entity();
     const countNow = Math.floor(Date.now() / 1000);
     this.countFinal = countNow + timeToEventInSec;
@@ -33,21 +32,21 @@ export default class BancaModel extends Entity {
     text.fontSize = 8;
     text.color = Color3.Black();
     this.counterModel.addComponent(text);
-    const transform = new Transform({position: new Vector3(0, 1, 0)})
+    const transform = new Transform({ position: new Vector3(0, 1, 0) });
     this.counterModel.addComponent(transform);
     this.counterModel.setParent(this);
     engine.addEntity(this.counterModel);
     this.counterOn = true;
   }
 
-  update (dt: number) {
+  update(dt: number) {
     if (this.counterOn && this.counterModel !== undefined) {
       const countNow = Math.floor(Date.now() / 1000);
       const count = this.countFinal - countNow;
       if (count >= 0) {
         this.counterModel.getComponent(TextShape).value = count.toString();
       } else {
-        this.counterModel.getComponent(TextShape).value = "!!!";
+        this.counterModel.getComponent(TextShape).value = '!!!';
       }
     }
   }

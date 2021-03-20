@@ -1,3 +1,6 @@
+import {
+  ISystem, Transform, UICanvas, Vector3, engine,
+} from 'decentraland-ecs';
 import TicketMenu from './TicketMenu';
 import BichoMenu from './BichoMenu';
 import BancaModel from './BancaModel';
@@ -6,11 +9,15 @@ import BichoModel from './BichoModel';
 export default class SceneManager implements ISystem {
   onBuyWishEvent: (bicho: number, ticket: number) => void;
 
-  ticketMenu: TicketMenu;
-
   bichoMenu: BichoMenu;
 
+  group: any;
+
+  ticketMenu: TicketMenu;
+
   showingMenu: boolean;
+
+  mainBanca: BancaModel;
 
   onCloseMenu() {
     this.showingMenu = false;
@@ -18,6 +25,7 @@ export default class SceneManager implements ISystem {
 
   constructor(onBuyWishEvent: (bicho: number, ticket: number) => void) {
     this.onBuyWishEvent = onBuyWishEvent;
+    this.group = engine.getComponentGroup(Transform);
     const ticketCanvas = new UICanvas();
     const bichoCanvas = new UICanvas();
 
@@ -25,7 +33,7 @@ export default class SceneManager implements ISystem {
       this.showingMenu = false;
       this.ticketMenu.visible = false;
       this.onBuyWishEvent(bicho, ticket);
-      if (this.mainBanca !== undefined) {
+      if (!this.mainBanca) {
         for (const entity of this.group.entities) {
           if (entity instanceof BancaModel) {
             (entity as BancaModel).setCountdown(2000);
@@ -73,8 +81,6 @@ export default class SceneManager implements ISystem {
     });
     this.mainBanca = banca;
   }
-
-  group = engine.getComponentGroup(Transform);
 
   update(dt: number) {
     for (const entity of this.group.entities) {
