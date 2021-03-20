@@ -11,7 +11,8 @@ export default class BichoModel extends Entity {
   constructor(bicho: number, x: number = 0, y: number = 0, z: number = 0) {
     super();
     this.bicho = bicho;
-    this.addComponent(new Transform({ position: new Vector3(x, y, z) }));
+    this.addComponent(new Transform({ position: new Vector3(x, y, z),
+      scale: new Vector3(0.5, 1, 0.5) }));
     this.addComponent(new BoxShape());
 
     const bichoMaterial = new Material();
