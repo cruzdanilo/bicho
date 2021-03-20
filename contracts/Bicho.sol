@@ -10,25 +10,29 @@ contract Bicho is ERC1155('https://bicho-nft.web.app/bicho/{id}.json') {
     uint256 amount;
     uint256 wonShare;
   }
-  uint8 constant private BLOCK_INTERVAL = 20;
+  uint constant private EXPECTED_INTERVAL = 20 minutes;
+  uint constant private AVG_BLOCK_TIME = 13 seconds;
+  uint constant private BLOCK_INTERVAL = EXPECTED_INTERVAL/AVG_BLOCK_TIME;
   uint8 constant private MAX_NUMS = 25;
   uint private currentRound = 0;
-  uint private startedOnBlock;
+  uint private start;
   Ticket[] public tickets;
   Ticket[] public redeemList;
   uint256[MAX_NUMS] public sumsByNumber;
-  mapping (uint => uint8) public luckyNumbers;
+  mapping (uint => uint256) public luckyNumbers;
   event Birth(uint number);
 
   function bet(uint8 number) public payable {
-    if (startedOnBlock == 0 || block.number - startedOnBlock > BLOCK_INTERVAL) endGame();
+    if (block.number >= start + BLOCK_INTERVAL) endGame();
     tickets.push(Ticket({ player: msg.sender, number: number, amount: msg.value, wonShare: 0 }));
     sumsByNumber[number] += msg.value;
   }
 
   function endGame() public {
-    uint8 luckyNumber = uint8(uint(blockhash(block.number - 1)) % MAX_NUMS);
-    luckyNumbers[currentRound] = luckyNumber;
+    if (luckyNumbers[currentRound] == 0) {
+      fulfillRandomness('', uint(blockhash(block.number - 1)));
+    }
+    uint8 luckyNumber = uint8(luckyNumbers[currentRound] % MAX_NUMS);
     uint totalLost;
     uint totalWon = sumsByNumber[luckyNumber];
     for (uint8 number = 0; number < MAX_NUMS; number++) {
@@ -39,14 +43,14 @@ contract Bicho is ERC1155('https://bicho-nft.web.app/bicho/{id}.json') {
       for (uint i = 0; i < tickets.length; i++) {
         Ticket memory ticket = tickets[i];
         if (tickets[i].number != luckyNumber) continue;
-        uint256 weight = ticket.amount / totalWon;
-        uint256 withFee = totalLost * 9000 / 10000;
-        ticket.wonShare = withFee * weight;
+        uint256 dividend = ticket.amount * totalLost * 9000;
+        uint256 divisor =  totalWon * 10000;
+        ticket.wonShare = dividend / divisor;
         redeemList.push(ticket);
       }
     }
     while (tickets.length > 0) tickets.pop();
-    startedOnBlock = block.number;
+    start = block.number;
     currentRound++;
   }
 
@@ -54,7 +58,6 @@ contract Bicho is ERC1155('https://bicho-nft.web.app/bicho/{id}.json') {
     for (uint i = 0; i < redeemList.length; i++) {
       Ticket memory ticket = redeemList[i];
       breed(ticket.number);
-      console.log(ticket.number, ticket.wonShare, address(this).balance);
       payable(ticket.player).transfer(ticket.wonShare + ticket.amount);
     }
     while (redeemList.length > 0) redeemList.pop();
@@ -63,5 +66,9 @@ contract Bicho is ERC1155('https://bicho-nft.web.app/bicho/{id}.json') {
   function breed(uint8 number) internal {
     _mint(msg.sender, number, 1, '');
     emit Birth(number);
+  }
+
+  function fulfillRandomness(bytes32 _requestId, uint256 randomness) internal {
+    luckyNumbers[currentRound] = randomness;
   }
 }
