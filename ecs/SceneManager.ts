@@ -1,4 +1,4 @@
-import { RequestManager, ContractFactory } from 'eth-connect';
+import { RequestManager, ContractFactory } from 'eth-connect/dist/eth-connect';
 import {
   DecentralandInterface, ISystem, Transform, UICanvas, engine,
 } from 'decentraland-ecs';
@@ -11,7 +11,7 @@ import Bicho from '../artifacts/contracts/Bicho.sol/Bicho.json';
 
 declare const dcl: DecentralandInterface;
 // declare const BICHO_ADDRESS: string;
-const BICHO_ADDRESS = '0x537fCd9243837BA72d92dCB708e690E9141e4271';
+const BICHO_ADDRESS = '0xef4A759402d7Cd4790161c28084209674778B8c2';
 
 export default class SceneManager implements ISystem {
   onBuyWishEvent: (bicho: number, ticket: number, requestManager: RequestManager) => Promise<void>;
@@ -65,8 +65,14 @@ export default class SceneManager implements ISystem {
       this.requestManager = new RequestManager(web3);
       const factory = new ContractFactory(this.requestManager, Bicho.abi);
       const contract = (await factory.at(BICHO_ADDRESS)) as any;
-
-      console.log(await contract.repeatP({ from: '0xC8b8Ed1276e58dF741aD1a556505ab0ED1F6f91a', value: 123123984 }), 'bet!');
+      const value = { from: '0xC8b8Ed1276e58dF741aD1a556505ab0ED1F6f91a', value: 1231239 };
+      // console.log('abriu');
+      console.log(await contract.endGame({ from: '0xC8b8Ed1276e58dF741aD1a556505ab0ED1F6f91a' }));
+      // console.log(await contract.redeem({ from: '0xC8b8Ed1276e58dF741aD1a556505ab0ED1F6f91a' }), 'fecha');
+      // console.log('fechou');
+      // await contract.redeem({ from: '0xC8b8Ed1276e58dF741aD1a556505ab0ED1F6f91a' });
+      // await Promise.all(Array(25).fill(null).map((_, num) => contract.bet(num, value)));
+      // console.log(await contract.bet({ from: '0xC8b8Ed1276e58dF741aD1a556505ab0ED1F6f91a', value: 123123984 }), 'bet!');
     });
   }
 

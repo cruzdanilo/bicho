@@ -1,4 +1,4 @@
-import { ContractFactory, RequestManager } from 'eth-connect';
+import { ContractFactory, RequestManager } from 'eth-connect/dist/eth-connect';
 // import { Contract } from '@ethersproject/contracts';
 // import { Web3Provider } from '@ethersproject/providers';
 import IERC20 from '@openzeppelin/contracts/build/contracts/IERC20.json';

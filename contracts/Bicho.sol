@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.2;
+pragma abicoder v1;
 
 import { ERC1155 } from '@openzeppelin/contracts/token/ERC1155/ERC1155.sol';
 contract Bicho is ERC1155('https://bicho-nft.web.app/bicho/{id}.json') {
@@ -20,6 +21,7 @@ contract Bicho is ERC1155('https://bicho-nft.web.app/bicho/{id}.json') {
   uint256[MAX_NUMS] public sumsByNumber;
   mapping (uint => uint256) public luckyNumbers;
   event Birth(uint number);
+  event Result(uint round, uint number);
 
   function bet(uint8 number) public payable {
     if (block.number >= start + BLOCK_INTERVAL) endGame();
@@ -32,6 +34,7 @@ contract Bicho is ERC1155('https://bicho-nft.web.app/bicho/{id}.json') {
       fulfillRandomness('', uint(blockhash(block.number - 1)));
     }
     uint8 luckyNumber = uint8(luckyNumbers[currentRound] % MAX_NUMS);
+    emit Result(currentRound, luckyNumber);
     uint totalLost;
     uint totalWon = sumsByNumber[luckyNumber];
     for (uint8 number = 0; number < MAX_NUMS; number++) {
@@ -85,7 +88,7 @@ contract Bicho is ERC1155('https://bicho-nft.web.app/bicho/{id}.json') {
     emit Birth(number);
   }
 
-  function fulfillRandomness(bytes32 _requestId, uint256 randomness) internal {
+  function fulfillRandomness(bytes32, uint256 randomness) internal {
     luckyNumbers[currentRound] = randomness;
   }
 }
