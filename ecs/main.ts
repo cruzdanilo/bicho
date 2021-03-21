@@ -6,7 +6,7 @@ import SceneManager from './SceneManager';
 // @ts-ignore
 import Bicho from '../artifacts/contracts/Bicho.sol/Bicho.json';
 
-const BICHO_ADDRESS = '0x9790a13073521575b145360A27fa49943ffF548B';
+const BICHO_ADDRESS = '0xFDf0dC8A74ea2F1261A3bE20ACc0Ee58b4F363e8';
 
 const sceneManager = new SceneManager(async (
   bicho: number, ticket: number, requestManager: RequestManager,

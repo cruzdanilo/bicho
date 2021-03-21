@@ -17,9 +17,12 @@ describe('bicho', () => {
   beforeEach(async () => {
     bicho = await Bicho.deploy();
     await bicho.deployed();
+    console.log(await bicho.repeatP({ value: 2 }));
+    console.log(await bicho.repeat(12));
+    console.log(await bicho.repeat2(123424));
   });
 
-  it('playing with myself and should breed new bicho', async () => {
+  it.only('playing with myself and should breed new bicho', async () => {
     const beforeBalance = await w1.getBalance();
     const value = { value: 1e4, gasPrice: 0 };
     await Promise.all(Array(25).fill(null).map((_, i) => bicho.bet(i, value)));
