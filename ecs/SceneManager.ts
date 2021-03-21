@@ -1,4 +1,4 @@
-import { Web3Provider } from '@ethersproject/providers';
+import { RequestManager, ContractFactory } from 'eth-connect';
 import {
   DecentralandInterface, ISystem, Transform, UICanvas, engine,
 } from 'decentraland-ecs';
@@ -6,11 +6,15 @@ import TicketMenu from './TicketMenu';
 import BichoMenu from './BichoMenu';
 import BancaModel from './BancaModel';
 import BichoModel from './BichoModel';
+// @ts-ignore
+import Bicho from '../artifacts/contracts/Bicho.sol/Bicho.json';
 
 declare const dcl: DecentralandInterface;
+// declare const BICHO_ADDRESS: string;
+const BICHO_ADDRESS = '0x537fCd9243837BA72d92dCB708e690E9141e4271';
 
 export default class SceneManager implements ISystem {
-  onBuyWishEvent: (bicho: number, ticket: number, ethers: Web3Provider) => Promise<void>;
+  onBuyWishEvent: (bicho: number, ticket: number, requestManager: RequestManager) => Promise<void>;
 
   bichoMenu: BichoMenu;
 
@@ -22,14 +26,14 @@ export default class SceneManager implements ISystem {
 
   mainBanca: BancaModel;
 
-  ethers: Web3Provider;
+  requestManager: RequestManager;
 
   onCloseMenu() {
     this.showingMenu = false;
   }
 
   constructor(
-    onBuyWishEvent: (bicho: number, ticket: number, ethers: Web3Provider) => Promise<void>,
+    onBuyWishEvent: (bicho: number, ticket: number, requestManager: RequestManager) => Promise<void>,
   ) {
     this.onBuyWishEvent = onBuyWishEvent;
     this.group = engine.getComponentGroup(Transform);
@@ -39,7 +43,7 @@ export default class SceneManager implements ISystem {
     this.ticketMenu = new TicketMenu(ticketCanvas, (bicho: number, ticket: number) => {
       this.showingMenu = false;
       this.ticketMenu.visible = false;
-      this.onBuyWishEvent(bicho, ticket, this.ethers);
+      this.onBuyWishEvent(bicho, ticket, this.requestManager);
       for (const entity of this.group.entities) {
         if (entity instanceof BancaModel) {
           (entity as BancaModel).setCountdown(2000);
@@ -58,7 +62,11 @@ export default class SceneManager implements ISystem {
 
     dcl.loadModule('web3-provider').then(async ({ rpcHandle }) => {
       const web3 = await dcl.callRpc(rpcHandle, 'getProvider', []);
-      this.ethers = new Web3Provider(web3);
+      this.requestManager = new RequestManager(web3);
+      const factory = new ContractFactory(this.requestManager, Bicho.abi);
+      const contract = (await factory.at(BICHO_ADDRESS)) as any;
+
+      console.log(await contract.repeatP({ from: '0xC8b8Ed1276e58dF741aD1a556505ab0ED1F6f91a', value: 123123984 }), 'bet!');
     });
   }
 

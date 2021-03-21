@@ -34,7 +34,8 @@
     "@ethersproject/providers": "^5.0.24",
     "@openzeppelin/contracts": "^4.0.0-rc.0",
     "core-js": "^3.9.1",
-    "decentraland-ecs": "^6.6.4"
+    "decentraland-ecs": "^6.6.4",
+    "eth-connect": "^5.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.13.10",

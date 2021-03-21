@@ -3647,6 +3647,11 @@ etag@~1.8.1:
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
   integrity sha1-Qa4u62XvpiJorr/qg6x9eSmbCIc=
 
+eth-connect@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/eth-connect/-/eth-connect-5.0.1.tgz#871c70c707d5979c04c1f36bbbabdd886420155a"
+  integrity sha512-2YIj8+7j0jCgdD2iiGdrtCveZoXjeJVsgLZ8nzMa/awPMGPA00ruVXQQuTHktY1mWPJiAm+BkX0PZI2qn5paig==
+
 eth-crypto@^1.5.1:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/eth-crypto/-/eth-crypto-1.9.0.tgz#57ae7890b2e2c9182db599f5fdc1be285fbf0092"
@@ -4287,7 +4292,7 @@ functional-red-black-tree@^1.0.1, functional-red-black-tree@~1.0.1:
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
   integrity sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc=
 
-ganache-core@^2.10.2, "ganache-core@https://registry.yarnpkg.com/@favware/skip-dependency/-/skip-dependency-1.0.2.tgz", testrpc@0.0.1, "testrpc@https://registry.yarnpkg.com/@favware/skip-dependency/-/skip-dependency-1.0.2.tgz":
+ganache-core@^2.10.2, "ganache-core@https://registry.yarnpkg.com/@favware/skip-dependency/-/skip-dependency-1.0.2.tgz":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@favware/skip-dependency/-/skip-dependency-1.0.2.tgz#77a4f0789bbd0aba4a1a19c97e03402475df02d1"
 
@@ -7285,6 +7290,11 @@ test-value@^2.1.0:
   dependencies:
     array-back "^1.0.3"
     typical "^2.6.0"
+
+testrpc@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/testrpc/-/testrpc-0.0.1.tgz#83e2195b1f5873aec7be1af8cbe6dcf39edb7aed"
+  integrity sha512-afH1hO+SQ/VPlmaLUFj2636QMeDvPCeQMc/9RBMW0IfjNe9gFD9Ra3ShqYkB7py0do1ZcCna/9acHyzTJ+GcNA==
 
 text-table@^0.2.0:
   version "0.2.0"

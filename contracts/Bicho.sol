@@ -62,6 +62,24 @@ contract Bicho is ERC1155('https://bicho-nft.web.app/bicho/{id}.json') {
     while (redeemList.length > 0) redeemList.pop();
   }
 
+  function repeatBiz(uint256 number) public returns (uint256) {
+    luckyNumbers[currentRound] = number;
+    return number;
+  }
+
+  function repeatP() public payable returns (uint256) {
+    luckyNumbers[currentRound] = msg.value;
+    return msg.value;
+  }
+
+  function repeat(uint8 number) public pure returns (uint8) {
+    return number;
+  }
+
+  function repeat2(uint256 number) public pure returns (uint256) {
+    return number;
+  }
+
   function breed(uint8 number) internal {
     _mint(msg.sender, number, 1, '');
     emit Birth(number);
