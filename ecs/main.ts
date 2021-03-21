@@ -1,7 +1,4 @@
 import { ContractFactory, RequestManager } from 'eth-connect/dist/eth-connect';
-// import { Contract } from '@ethersproject/contracts';
-// import { Web3Provider } from '@ethersproject/providers';
-import IERC20 from '@openzeppelin/contracts/build/contracts/IERC20.json';
 import SceneManager from './SceneManager';
 // @ts-ignore
 import Bicho from '../artifacts/contracts/Bicho.sol/Bicho.json';
@@ -9,13 +6,12 @@ import Bicho from '../artifacts/contracts/Bicho.sol/Bicho.json';
 const BICHO_ADDRESS = '0xFDf0dC8A74ea2F1261A3bE20ACc0Ee58b4F363e8';
 
 const sceneManager = new SceneManager(async (
-  bicho: number, ticket: number, requestManager: RequestManager,
+  bicho: number, ticket: number, requestManager: RequestManager, account: string,
 ) => {
-  console.log(`ticket ${ticket} for bicho ${bicho}`);
+  console.log(`ticket ${ticket} for bicho ${bicho} from: ${account}`);
   const factory = new ContractFactory(requestManager, Bicho.abi);
   const contract = (await factory.at(BICHO_ADDRESS)) as any;
-
-  console.log(await contract.bet('0x1', { from: '0xC8b8Ed1276e58dF741aD1a556505ab0ED1F6f91a', value: 100000 }), 'bet!');
+  await contract.bet(bicho, { from: account, value: ticket * 10e4 });
 });
 
 sceneManager.spawnBanca(8, 1, 8);
