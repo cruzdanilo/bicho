@@ -23,7 +23,8 @@
     "lint:sol": "cross-env TS_NODE_PROJECT=tsconfig.tools.json hardhat check",
     "test": "cross-env TS_NODE_PROJECT=tsconfig.tools.json hardhat test",
     "build:contracts": "cross-env TS_NODE_PROJECT=tsconfig.tools.json hardhat compile",
-    "deploy:now": "dcl export && now export"
+    "deploy:now": "dcl export && now export",
+    "postinstall": "cd node_modules/eth-connect && npm install && make build"
   },
   "engines": {
     "node": ">=15",
@@ -35,7 +36,7 @@
     "@openzeppelin/contracts": "^4.0.0-rc.0",
     "core-js": "^3.9.1",
     "decentraland-ecs": "^6.6.4",
-    "eth-connect": "^5.0.1"
+    "eth-connect": "github:cruzdanilo/eth-connect#payable"
   },
   "devDependencies": {
     "@babel/core": "^7.13.10",

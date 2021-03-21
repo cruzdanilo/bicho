@@ -1,4 +1,4 @@
-import { RequestManager, ContractFactory } from 'eth-connect/dist/eth-connect';
+import { RequestManager } from 'eth-connect/dist';
 import {
   DecentralandInterface, ISystem, Transform, UICanvas, engine,
 } from 'decentraland-ecs';

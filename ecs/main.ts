@@ -1,4 +1,4 @@
-import { ContractFactory, RequestManager } from 'eth-connect/dist/eth-connect';
+import { RequestManager, ContractFactory } from 'eth-connect/dist';
 import SceneManager from './SceneManager';
 // @ts-ignore
 import Bicho from '../artifacts/contracts/Bicho.sol/Bicho.json';
