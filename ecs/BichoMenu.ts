@@ -10,7 +10,7 @@ export default class BichoMenu extends Menu {
     Object.setPrototypeOf(this, BichoMenu.prototype);
     this.onClickImage = onClickImage;
     for (let i = 0; i < 25; i++) {
-      this.addBicho(i % 5, Math.floor(i / 5), i + 1);
+      this.addBicho(i % 5, Math.floor(i / 5), i);
     }
   }
 
