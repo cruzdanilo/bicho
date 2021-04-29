@@ -856,6 +856,21 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
+"@dcl/ecs-scene-utils@^1.6.1":
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/@dcl/ecs-scene-utils/-/ecs-scene-utils-1.6.1.tgz#ac558701a72a9e77db34e10feb45b973af7b1320"
+  integrity sha512-HA7cwPspgLsx5+YulrimHU4wl7sZaX8DNfCwHBn3g4m0w6vzyy9GgWme+yLUqexUIedGkuhu+nNiWH2fZk4CNQ==
+
+"@dcl/npc-scene-utils@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@dcl/npc-scene-utils/-/npc-scene-utils-1.4.0.tgz#dbb480a68d75320e6abc7872a06952804c8c2137"
+  integrity sha512-+KeWiIZJQuEFZHtRcQuC7+6Yo4Zedos6utbdddR6TwxL0eb14a35eplsDWiBouQJYL5JbF4jjVgQDbnsO/DrZg==
+
+"@dcl/ui-scene-utils@^1.8.0":
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/@dcl/ui-scene-utils/-/ui-scene-utils-1.8.0.tgz#8b295b16fc2d5de1a770a9e88e62202b65d70f02"
+  integrity sha512-hZV4bvhIdbB/Lxpdi5oCrjyEwtefzKPtwTfoQ3x4KlDKb4JhGAkVOSeCrT39/2TtLxRcOx5Yn/+MrLeuPIw1Ag==
+
 "@discoveryjs/json-ext@^0.5.0":
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-0.5.2.tgz#8f03a22a04de437254e8ce8cc84ba39689288752"
