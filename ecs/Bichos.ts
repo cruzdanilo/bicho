@@ -29,9 +29,7 @@ export default class Bichos {
       case 23: return new Texture('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/ItsukushimaDeer7389.jpg/143px-ItsukushimaDeer7389.jpg');
       case 24: return new Texture('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Koe_zijaanzicht_2.JPG/195px-Koe_zijaanzicht_2.JPG');
 
-      default: {
-        return new Texture('bicho1.png');
-      }
+      default: return null;
     }
   }
 

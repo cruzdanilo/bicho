@@ -84,7 +84,7 @@ export default class TicketMenu extends Menu {
 
   show(bicho: number) {
     this.bicho = bicho;
-    this.setTitle(bicho);
+    this.setTitle(bicho + 1);
     this.visible = true;
     this.isPointerBlocker = true;
     this.image.source = Bichos.getBichoTexture(bicho);

@@ -54,6 +54,6 @@ sceneManager.spawnBicho(21, 1, 1, 4);
 sceneManager.spawnBicho(22, 4, 1, 4);
 sceneManager.spawnBicho(23, 7, 1, 4);
 sceneManager.spawnBicho(24, 10, 1, 4);
-sceneManager.spawnBicho(25, 13, 1, 4);
+sceneManager.spawnBicho(0, 13, 1, 4);
 
 sceneManager.start();
