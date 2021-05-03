@@ -1,17 +1,27 @@
-import { Contract } from '@ethersproject/contracts';
-import { Web3Provider } from '@ethersproject/providers';
-// @ts-ignore
-import Bicho from '../artifacts/contracts/Bicho.sol/Bicho.json';
+import { DecentralandInterface } from 'decentraland-ecs';
+import { RequestManager, ContractFactory } from 'eth-connect';
 import SceneManager from './SceneManager';
+import BichoABI from '../abi/Bicho.json';
 
 declare const BICHO_ADDRESS: string;
+declare const dcl: DecentralandInterface;
 
-const sceneManager = new SceneManager(async (
-  bicho: number, ticket: number, ethers: Web3Provider,
-) => {
+let requestManager: RequestManager = null;
+dcl.loadModule('web3-provider').then(async ({ rpcHandle }) => {
+  const web3 = await dcl.callRpc(rpcHandle, 'getProvider', []);
+  requestManager = new RequestManager(web3);
+});
+
+let account: string = null;
+dcl.loadModule('EthereumController').then(async ({ rpcHandle }) => {
+  account = await dcl.callRpc(rpcHandle, 'getUserAccount', []);
+});
+
+const sceneManager = new SceneManager(async (bicho: number, ticket: number) => {
   console.log(`ticket ${ticket} for bicho ${bicho}`);
-  const contract = new Contract(BICHO_ADDRESS, Bicho.abi, ethers);
-  console.log(await contract.bet(bicho, 1));
+  const factory = new ContractFactory(requestManager, BichoABI);
+  const contract = (await factory.at(BICHO_ADDRESS)) as any;
+  await contract.bet(bicho, { from: account, value: ticket * 10e4 });
 });
 
 sceneManager.spawnBanca(8, 1, 8);

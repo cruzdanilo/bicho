@@ -1,16 +1,13 @@
-import { Web3Provider } from '@ethersproject/providers';
 import {
-  DecentralandInterface, ISystem, Transform, UICanvas, engine,
+  ISystem, Transform, UICanvas, engine,
 } from 'decentraland-ecs';
 import TicketMenu from './TicketMenu';
 import BichoMenu from './BichoMenu';
 import BancaModel from './BancaModel';
 import BichoModel from './BichoModel';
 
-declare const dcl: DecentralandInterface;
-
 export default class SceneManager implements ISystem {
-  onBuyWishEvent: (bicho: number, ticket: number, ethers: Web3Provider) => Promise<void>;
+  onBuyWishEvent: (bicho: number, ticket: number) => Promise<void>;
 
   bichoMenu: BichoMenu;
 
@@ -22,15 +19,11 @@ export default class SceneManager implements ISystem {
 
   mainBanca: BancaModel;
 
-  ethers: Web3Provider;
-
   onCloseMenu() {
     this.showingMenu = false;
   }
 
-  constructor(
-    onBuyWishEvent: (bicho: number, ticket: number, ethers: Web3Provider) => Promise<void>,
-  ) {
+  constructor(onBuyWishEvent: (bicho: number, ticket: number) => Promise<void>) {
     this.onBuyWishEvent = onBuyWishEvent;
     this.group = engine.getComponentGroup(Transform);
     const ticketCanvas = new UICanvas();
@@ -39,7 +32,7 @@ export default class SceneManager implements ISystem {
     this.ticketMenu = new TicketMenu(ticketCanvas, (bicho: number, ticket: number) => {
       this.showingMenu = false;
       this.ticketMenu.visible = false;
-      this.onBuyWishEvent(bicho, ticket, this.ethers);
+      this.onBuyWishEvent(bicho, ticket);
       for (const entity of this.group.entities) {
         if (entity instanceof BancaModel) {
           (entity as BancaModel).setCountdown(2000);
@@ -55,11 +48,6 @@ export default class SceneManager implements ISystem {
     this.bichoMenu.addOnClose(() => this.onCloseMenu());
 
     this.showingMenu = false;
-
-    dcl.loadModule('web3-provider').then(async ({ rpcHandle }) => {
-      const web3 = await dcl.callRpc(rpcHandle, 'getProvider', []);
-      this.ethers = new Web3Provider(web3);
-    });
   }
 
   public start() {

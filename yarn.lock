@@ -1048,7 +1048,7 @@
   dependencies:
     "@ethersproject/bignumber" "^5.0.13"
 
-"@ethersproject/contracts@5.0.12", "@ethersproject/contracts@^5.0.12":
+"@ethersproject/contracts@5.0.12":
   version "5.0.12"
   resolved "https://registry.yarnpkg.com/@ethersproject/contracts/-/contracts-5.0.12.tgz#6d488db46221258399dfe80b89bf849b3afd7897"
   integrity sha512-srijy31idjz8bE+gL1I6IRj2H4I9dUwfQ+QroLrIgNdGArqY8y2iFUKa3QTy+JBX26fJsdYiCQi1kKkaNpnMpQ==
@@ -1149,7 +1149,7 @@
   dependencies:
     "@ethersproject/logger" "^5.0.8"
 
-"@ethersproject/providers@5.0.24", "@ethersproject/providers@^5.0.24":
+"@ethersproject/providers@5.0.24":
   version "5.0.24"
   resolved "https://registry.yarnpkg.com/@ethersproject/providers/-/providers-5.0.24.tgz#4c638a029482d052faa18364b5e0e2d3ddd9c0cb"
   integrity sha512-M4Iw1r4gGJkt7ZUa++iREuviKL/DIpmIMsaUlVlXtV+ZrUXeN8xQ3zOTrbz7R4h9W9oljBZM7i4D3Kn1krJ30A==
@@ -3661,6 +3661,11 @@ etag@~1.8.1:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
   integrity sha1-Qa4u62XvpiJorr/qg6x9eSmbCIc=
+
+eth-connect@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/eth-connect/-/eth-connect-6.0.0.tgz#09bbe12df57a266573f2ffe0e8ec7185044617af"
+  integrity sha512-We+FmEtdVnu61uYJf2BffoK1qLjyLJfNy/4FAqCp5oW9sHdIAEEex0MHyt0WYIBMMAnexusmEbHzT39H2bhKYQ==
 
 eth-crypto@^1.5.1:
   version "1.9.0"
