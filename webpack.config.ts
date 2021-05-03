@@ -2,7 +2,7 @@ import 'dotenv/config';
 import { Configuration, DefinePlugin, ProvidePlugin } from 'webpack';
 
 const {
-  BICHO_ADDRESS = '0x9790a13073521575b145360A27fa49943ffF548B',
+  BICHO_ADDRESS = '0xFDf0dC8A74ea2F1261A3bE20ACc0Ee58b4F363e8',
 } = process.env;
 
 function config(_: any, { mode = 'production' }): Configuration {
