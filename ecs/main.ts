@@ -7,18 +7,19 @@ declare const BICHO_ADDRESS: string;
 declare const dcl: DecentralandInterface;
 
 let requestManager: RequestManager = null;
-let Bicho: any = null;
+let contract: any = null;
 dcl.loadModule('web3-provider').then(async ({ rpcHandle }) => {
   const web3 = await dcl.callRpc(rpcHandle, 'getProvider', []);
   requestManager = new RequestManager(web3);
   const factory = new ContractFactory(requestManager, BichoABI);
-  Bicho = await factory.at(BICHO_ADDRESS);
+  contract = await factory.at(BICHO_ADDRESS);
 });
 
 let account: string = null;
 dcl.loadModule('EthereumController').then(async ({ rpcHandle }) => {
   account = await dcl.callRpc(rpcHandle, 'getUserAccount', []);
-  const balances: BigNumber[] = await Bicho.balanceOfBatch(
+  if (!account) return;
+  const balances: BigNumber[] = await contract.balanceOfBatch(
     Array(25).fill(account),
     Array(25).fill(null).map((_, i) => i),
   );
@@ -30,7 +31,7 @@ dcl.loadModule('EthereumController').then(async ({ rpcHandle }) => {
 
 const sceneManager = new SceneManager(async (bicho: number, ticket: number) => {
   log(`ticket ${ticket} for bicho ${bicho}`);
-  await Bicho.bet(bicho, { from: account, value: ticket * 10e4 });
+  await contract.bet(bicho, { from: account, value: ticket * 10e4 });
 });
 
 sceneManager.spawnBanca(8, 1, 8);
