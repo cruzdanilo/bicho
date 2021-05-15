@@ -1,4 +1,4 @@
-import { DecentralandInterface } from 'decentraland-ecs';
+import { DecentralandInterface, log } from 'decentraland-ecs';
 import { RequestManager, ContractFactory, BigNumber } from 'eth-connect';
 import SceneManager from './SceneManager';
 import BichoABI from '../abi/Bicho.json';
@@ -22,14 +22,14 @@ dcl.loadModule('EthereumController').then(async ({ rpcHandle }) => {
     Array(25).fill(account),
     Array(25).fill(null).map((_, i) => i),
   );
-  console.log('balances', balances
+  log('balances', balances
     .map((balance, bicho) => ({ bicho, balance }))
     .filter(({ balance }) => !balance.isZero())
     .map(({ bicho, balance }) => `${bicho}: ${balance}`));
 });
 
 const sceneManager = new SceneManager(async (bicho: number, ticket: number) => {
-  console.log(`ticket ${ticket} for bicho ${bicho}`);
+  log(`ticket ${ticket} for bicho ${bicho}`);
   await Bicho.bet(bicho, { from: account, value: ticket * 10e4 });
 });
 

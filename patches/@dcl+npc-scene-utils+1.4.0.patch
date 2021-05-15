@@ -1,0 +1,90 @@
+diff --git a/node_modules/@dcl/npc-scene-utils/dist/npc/move.d.ts b/node_modules/@dcl/npc-scene-utils/dist/npc/move.d.ts
+index 91ddcfd..5166a2a 100644
+--- a/node_modules/@dcl/npc-scene-utils/dist/npc/move.d.ts
++++ b/node_modules/@dcl/npc-scene-utils/dist/npc/move.d.ts
+@@ -1,4 +1,4 @@
+-/// <reference types="dcl" />
++import { ISystem, Vector3 } from 'decentraland-ecs';
+ import { NPC } from './npc';
+ export declare class NPCLerpData {
+     path: Vector3[];
+diff --git a/node_modules/@dcl/npc-scene-utils/dist/npc/npc.d.ts b/node_modules/@dcl/npc-scene-utils/dist/npc/npc.d.ts
+index 40eee02..94372e2 100644
+--- a/node_modules/@dcl/npc-scene-utils/dist/npc/npc.d.ts
++++ b/node_modules/@dcl/npc-scene-utils/dist/npc/npc.d.ts
+@@ -1,4 +1,4 @@
+-/// <reference types="dcl" />
++import { AnimationState, Entity, TranformConstructorArgs } from 'decentraland-ecs';
+ import { DialogWindow } from '../ui/index';
+ import { Dialog, FollowPathData, NPCData, NPCState } from '../utils/types';
+ import { DialogBubble } from '../ui/bubble';
+diff --git a/node_modules/@dcl/npc-scene-utils/dist/trigger/triggerSystem.d.ts b/node_modules/@dcl/npc-scene-utils/dist/trigger/triggerSystem.d.ts
+index 181700b..42c6e7a 100644
+--- a/node_modules/@dcl/npc-scene-utils/dist/trigger/triggerSystem.d.ts
++++ b/node_modules/@dcl/npc-scene-utils/dist/trigger/triggerSystem.d.ts
+@@ -1,4 +1,4 @@
+-/// <reference types="dcl" />
++import { Entity, ISystem, Vector3 } from 'decentraland-ecs';
+ import { TriggerData } from '../utils/types';
+ export declare class NPCTriggerSystem implements ISystem {
+     private static _instance;
+diff --git a/node_modules/@dcl/npc-scene-utils/dist/ui/bubble.d.ts b/node_modules/@dcl/npc-scene-utils/dist/ui/bubble.d.ts
+index ffa6d01..54d8b3d 100644
+--- a/node_modules/@dcl/npc-scene-utils/dist/ui/bubble.d.ts
++++ b/node_modules/@dcl/npc-scene-utils/dist/ui/bubble.d.ts
+@@ -1,4 +1,4 @@
+-/// <reference types="dcl" />
++import { BasicMaterial, Entity, ISystem, TextShape, Texture } from 'decentraland-ecs';
+ import { Dialog } from "../utils/types";
+ /**
+  * Displays an in-world panel as a speech bubble, with text from an array of Dialog objects.
+diff --git a/node_modules/@dcl/npc-scene-utils/dist/ui/index.d.ts b/node_modules/@dcl/npc-scene-utils/dist/ui/index.d.ts
+index 0cd2d91..65c418f 100644
+--- a/node_modules/@dcl/npc-scene-utils/dist/ui/index.d.ts
++++ b/node_modules/@dcl/npc-scene-utils/dist/ui/index.d.ts
+@@ -1,4 +1,4 @@
+-/// <reference types="dcl" />
++import { Entity, ISystem, Subscription, Texture, UICanvas, UIContainerRect, UIImage, UIText } from 'decentraland-ecs';
+ import { ImageData, Dialog, ButtonStyles } from '../utils/types';
+ export declare enum ConfirmMode {
+     Confirm = 0,
+diff --git a/node_modules/@dcl/npc-scene-utils/dist/ui/resources.d.ts b/node_modules/@dcl/npc-scene-utils/dist/ui/resources.d.ts
+index 1ccc200..e51877c 100644
+--- a/node_modules/@dcl/npc-scene-utils/dist/ui/resources.d.ts
++++ b/node_modules/@dcl/npc-scene-utils/dist/ui/resources.d.ts
+@@ -1,4 +1,4 @@
+-/// <reference types="dcl" />
++import { UIImage } from 'decentraland-ecs';
+ import { ImageSection } from '../utils/types';
+ export declare function setSection(image: UIImage, section: ImageSection): void;
+ export declare function buttonIconPos(textLen: number): number;
+diff --git a/node_modules/@dcl/npc-scene-utils/dist/utils/default-ui-components.d.ts b/node_modules/@dcl/npc-scene-utils/dist/utils/default-ui-components.d.ts
+index 5987f8c..21a8be8 100644
+--- a/node_modules/@dcl/npc-scene-utils/dist/utils/default-ui-components.d.ts
++++ b/node_modules/@dcl/npc-scene-utils/dist/utils/default-ui-components.d.ts
+@@ -1,4 +1,4 @@
+-/// <reference types="dcl" />
++import { Font, PlaneShape, Texture, UICanvas, Vector2 } from 'decentraland-ecs';
+ import { ImageSection } from "./types";
+ export declare const canvas: UICanvas;
+ export declare let SFFont: Font;
+diff --git a/node_modules/@dcl/npc-scene-utils/dist/utils/timerComponents.d.ts b/node_modules/@dcl/npc-scene-utils/dist/utils/timerComponents.d.ts
+index 6df62c6..90b1a31 100644
+--- a/node_modules/@dcl/npc-scene-utils/dist/utils/timerComponents.d.ts
++++ b/node_modules/@dcl/npc-scene-utils/dist/utils/timerComponents.d.ts
+@@ -1,4 +1,4 @@
+-/// <reference types="dcl" />
++import { IEntity, ISystem } from 'decentraland-ecs';
+ export interface ITimerComponent {
+     elapsedTime: number;
+     targetTime: number;
+diff --git a/node_modules/@dcl/npc-scene-utils/dist/utils/types.d.ts b/node_modules/@dcl/npc-scene-utils/dist/utils/types.d.ts
+index 0871d4c..224a082 100644
+--- a/node_modules/@dcl/npc-scene-utils/dist/utils/types.d.ts
++++ b/node_modules/@dcl/npc-scene-utils/dist/utils/types.d.ts
+@@ -1,4 +1,4 @@
+-/// <reference types="dcl" />
++import { Entity, Vector3 } from 'decentraland-ecs';
+ /**
+  * Fragment of a conversation with an NPC
+  *

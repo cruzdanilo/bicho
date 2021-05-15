@@ -6,8 +6,8 @@
     "allowJs": true,
     "checkJs": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
+    "allowSyntheticDefaultImports": true
   },
   "include": ["./*.ts", "test/**/*.ts", "**/.*rc.js"],
-  "exclude": ["node_modules", "bin"]
+  "exclude": ["node_modules", "dist", "export"]
 }

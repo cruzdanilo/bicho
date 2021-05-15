@@ -1,0 +1,206 @@
+diff --git a/node_modules/@dcl/ui-scene-utils/dist/announcement/index.d.ts b/node_modules/@dcl/ui-scene-utils/dist/announcement/index.d.ts
+index 72f8833..1295d54 100644
+--- a/node_modules/@dcl/ui-scene-utils/dist/announcement/index.d.ts
++++ b/node_modules/@dcl/ui-scene-utils/dist/announcement/index.d.ts
+@@ -1,4 +1,4 @@
+-/// <reference types="dcl" />
++import { Color4 } from 'decentraland-ecs';
+ /**
+  * Displays text in the center of the UI for a specific time
+  *
+diff --git a/node_modules/@dcl/ui-scene-utils/dist/bar/index.d.ts b/node_modules/@dcl/ui-scene-utils/dist/bar/index.d.ts
+index f8f49db..28b8b82 100644
+--- a/node_modules/@dcl/ui-scene-utils/dist/bar/index.d.ts
++++ b/node_modules/@dcl/ui-scene-utils/dist/bar/index.d.ts
+@@ -1,4 +1,4 @@
+-/// <reference types="dcl" />
++import { Color4, Entity, UICanvas, UIContainerRect, UIImage } from 'decentraland-ecs';
+ import { BarStyles } from '../utils/types';
+ /**
+  * Displays a colored bar that can be filled up and updated to different values.
+diff --git a/node_modules/@dcl/ui-scene-utils/dist/cornerLabel/index.d.ts b/node_modules/@dcl/ui-scene-utils/dist/cornerLabel/index.d.ts
+index 16c2733..9304047 100644
+--- a/node_modules/@dcl/ui-scene-utils/dist/cornerLabel/index.d.ts
++++ b/node_modules/@dcl/ui-scene-utils/dist/cornerLabel/index.d.ts
+@@ -1,4 +1,4 @@
+-/// <reference types="dcl" />
++import { Color4, Entity, UICanvas, UIText } from 'decentraland-ecs';
+ /**
+  * Displays a number on the center of the UI
+  *
+diff --git a/node_modules/@dcl/ui-scene-utils/dist/counter/index.d.ts b/node_modules/@dcl/ui-scene-utils/dist/counter/index.d.ts
+index 8bd7744..b14c6f6 100644
+--- a/node_modules/@dcl/ui-scene-utils/dist/counter/index.d.ts
++++ b/node_modules/@dcl/ui-scene-utils/dist/counter/index.d.ts
+@@ -1,4 +1,4 @@
+-/// <reference types="dcl" />
++import { Color4, Entity, UICanvas, UIText } from 'decentraland-ecs';
+ /**
+  * Displays a number on the center of the UI
+  *
+diff --git a/node_modules/@dcl/ui-scene-utils/dist/loading/index.d.ts b/node_modules/@dcl/ui-scene-utils/dist/loading/index.d.ts
+index 34951d4..33ac678 100644
+--- a/node_modules/@dcl/ui-scene-utils/dist/loading/index.d.ts
++++ b/node_modules/@dcl/ui-scene-utils/dist/loading/index.d.ts
+@@ -1,4 +1,4 @@
+-/// <reference types="dcl" />
++import { Entity, UICanvas, UIImage } from 'decentraland-ecs';
+ /**
+  * Displays a loading icon on the center of the screen
+  * @param {number} [duration=3] Seconds to display the image onscreen. 0 keeps it on till you hide it manually
+diff --git a/node_modules/@dcl/ui-scene-utils/dist/prompts/customPrompt/index.d.ts b/node_modules/@dcl/ui-scene-utils/dist/prompts/customPrompt/index.d.ts
+index fc6b9c0..d1964df 100644
+--- a/node_modules/@dcl/ui-scene-utils/dist/prompts/customPrompt/index.d.ts
++++ b/node_modules/@dcl/ui-scene-utils/dist/prompts/customPrompt/index.d.ts
+@@ -1,4 +1,4 @@
+-/// <reference types="dcl" />
++import { Color4, Entity, Texture, UICanvas, UIImage, UIInputText, UIText } from 'decentraland-ecs';
+ import { PromptStyles, ButtonStyles, SwitchStyles, ImageSection } from '../../utils/types';
+ /**
+  * Creates a prompt object that includes a background and a close icon, and supports adding as many custom UI elements as desired
+diff --git a/node_modules/@dcl/ui-scene-utils/dist/prompts/fillInPrompt/index.d.ts b/node_modules/@dcl/ui-scene-utils/dist/prompts/fillInPrompt/index.d.ts
+index 6ca6fae..ac993d6 100644
+--- a/node_modules/@dcl/ui-scene-utils/dist/prompts/fillInPrompt/index.d.ts
++++ b/node_modules/@dcl/ui-scene-utils/dist/prompts/fillInPrompt/index.d.ts
+@@ -1,4 +1,4 @@
+-/// <reference types="dcl" />
++import { Entity, Subscription, UICanvas, UIImage, UIInputText, UIText } from 'decentraland-ecs';
+ /**
+  * Displays a prompt window with a field that can be filled in
+  *
+diff --git a/node_modules/@dcl/ui-scene-utils/dist/prompts/okPrompt/index.d.ts b/node_modules/@dcl/ui-scene-utils/dist/prompts/okPrompt/index.d.ts
+index 1f30f04..136d144 100644
+--- a/node_modules/@dcl/ui-scene-utils/dist/prompts/okPrompt/index.d.ts
++++ b/node_modules/@dcl/ui-scene-utils/dist/prompts/okPrompt/index.d.ts
+@@ -1,4 +1,4 @@
+-/// <reference types="dcl" />
++import { Entity, Subscription, UICanvas, UIImage, UIText } from 'decentraland-ecs';
+ /**
+  * Displays a prompt window with a custom string and an OK button
+  *
+diff --git a/node_modules/@dcl/ui-scene-utils/dist/prompts/optionPrompt/index.d.ts b/node_modules/@dcl/ui-scene-utils/dist/prompts/optionPrompt/index.d.ts
+index ac6d39e..8624e71 100644
+--- a/node_modules/@dcl/ui-scene-utils/dist/prompts/optionPrompt/index.d.ts
++++ b/node_modules/@dcl/ui-scene-utils/dist/prompts/optionPrompt/index.d.ts
+@@ -1,4 +1,4 @@
+-/// <reference types="dcl" />
++import { Entity, Subscription, UICanvas, UIImage, UIText } from 'decentraland-ecs';
+ /**
+  * Displays a prompt window with two buttons that perform separate actions
+  *
+diff --git a/node_modules/@dcl/ui-scene-utils/dist/search/UIClickableContainerRect.d.ts b/node_modules/@dcl/ui-scene-utils/dist/search/UIClickableContainerRect.d.ts
+index ae6d2bd..0ac8453 100644
+--- a/node_modules/@dcl/ui-scene-utils/dist/search/UIClickableContainerRect.d.ts
++++ b/node_modules/@dcl/ui-scene-utils/dist/search/UIClickableContainerRect.d.ts
+@@ -1,5 +1,4 @@
+-/// <reference types="dcl" />
+-/// <reference types="env" />
++import { UIContainerRect, UIShape } from 'decentraland-ecs';
+ import { InitialUIProperties, UIBase } from "./commons/UIBase";
+ /**
+  * This is a UIContainerRect, with a configurable click event
+diff --git a/node_modules/@dcl/ui-scene-utils/dist/search/UIPoweredInputText.d.ts b/node_modules/@dcl/ui-scene-utils/dist/search/UIPoweredInputText.d.ts
+index 6a753d9..f1b01e9 100644
+--- a/node_modules/@dcl/ui-scene-utils/dist/search/UIPoweredInputText.d.ts
++++ b/node_modules/@dcl/ui-scene-utils/dist/search/UIPoweredInputText.d.ts
+@@ -1,5 +1,4 @@
+-/// <reference types="dcl" />
+-/// <reference types="env" />
++import { UIInputText, UIShape } from 'decentraland-ecs';
+ import { InitialUIProperties, UIBase } from "./commons/UIBase";
+ /**
+  * This is a UIInputText, but wrapped on a simpler interface
+diff --git a/node_modules/@dcl/ui-scene-utils/dist/search/UISearchPrompt.d.ts b/node_modules/@dcl/ui-scene-utils/dist/search/UISearchPrompt.d.ts
+index 6e0b78f..f635fa5 100644
+--- a/node_modules/@dcl/ui-scene-utils/dist/search/UISearchPrompt.d.ts
++++ b/node_modules/@dcl/ui-scene-utils/dist/search/UISearchPrompt.d.ts
+@@ -1,5 +1,4 @@
+-/// <reference types="dcl" />
+-/// <reference types="env" />
++import { Color4, UIContainerRect, UIShape } from 'decentraland-ecs';
+ import { RecursivePartial } from "./commons/shared";
+ import { UIBase } from "./commons/UIBase";
+ export declare class UISearchPrompt extends UIBase<UIContainerRect> {
+diff --git a/node_modules/@dcl/ui-scene-utils/dist/search/UISearchPromptOption.d.ts b/node_modules/@dcl/ui-scene-utils/dist/search/UISearchPromptOption.d.ts
+index 2869560..c876e2a 100644
+--- a/node_modules/@dcl/ui-scene-utils/dist/search/UISearchPromptOption.d.ts
++++ b/node_modules/@dcl/ui-scene-utils/dist/search/UISearchPromptOption.d.ts
+@@ -1,5 +1,4 @@
+-/// <reference types="dcl" />
+-/// <reference types="env" />
++import { Color4, UIContainerRect, UIShape } from 'decentraland-ecs';
+ import { InitialUIProperties, UIBase } from "./commons/UIBase";
+ import { SearchPromptOption as SearchPromptOption } from "./UISearchPrompt";
+ export declare class UISearchPromptOption extends UIBase<UIContainerRect> {
+diff --git a/node_modules/@dcl/ui-scene-utils/dist/search/UISelectBox.d.ts b/node_modules/@dcl/ui-scene-utils/dist/search/UISelectBox.d.ts
+index 493ff53..81ac78d 100644
+--- a/node_modules/@dcl/ui-scene-utils/dist/search/UISelectBox.d.ts
++++ b/node_modules/@dcl/ui-scene-utils/dist/search/UISelectBox.d.ts
+@@ -1,4 +1,4 @@
+-/// <reference types="dcl" />
++import { UIContainerRect, UIShape } from 'decentraland-ecs';
+ import { UIBase } from "./commons/UIBase";
+ import { SearchPromptOption, UISearchPromtInitialProperties } from "./UISearchPrompt";
+ export declare class UISelectBox extends UIBase<UIContainerRect> {
+diff --git a/node_modules/@dcl/ui-scene-utils/dist/search/commons/UIBase.d.ts b/node_modules/@dcl/ui-scene-utils/dist/search/commons/UIBase.d.ts
+index b70b315..ca94975 100644
+--- a/node_modules/@dcl/ui-scene-utils/dist/search/commons/UIBase.d.ts
++++ b/node_modules/@dcl/ui-scene-utils/dist/search/commons/UIBase.d.ts
+@@ -1,5 +1,4 @@
+-/// <reference types="dcl" />
+-/// <reference types="env" />
++import { UIShape } from 'decentraland-ecs';
+ export declare abstract class UIBase<T extends UIShape> {
+     readonly shape: T;
+     constructor(shape: T, initialProperties?: InitialUIProperties<T>);
+diff --git a/node_modules/@dcl/ui-scene-utils/dist/search/commons/shared.d.ts b/node_modules/@dcl/ui-scene-utils/dist/search/commons/shared.d.ts
+index 8a99e3d..07a8633 100644
+--- a/node_modules/@dcl/ui-scene-utils/dist/search/commons/shared.d.ts
++++ b/node_modules/@dcl/ui-scene-utils/dist/search/commons/shared.d.ts
+@@ -1,5 +1,4 @@
+-/// <reference types="env" />
+-/// <reference types="dcl" />
++import { Color4 } from 'decentraland-ecs';
+ export declare function deepMerge<T extends Record<string, any>>(target: T, source: RecursivePartial<T>): T;
+ export declare type RecursivePartial<T> = {
+     [P in keyof T]?: T[P] extends Color4 ? T[P] : T[P] extends (infer U)[] ? RecursivePartial<U>[] : T[P] extends object ? RecursivePartial<T[P]> : T[P];
+diff --git a/node_modules/@dcl/ui-scene-utils/dist/ui-images/index.d.ts b/node_modules/@dcl/ui-scene-utils/dist/ui-images/index.d.ts
+index cd8afaf..39a1a60 100644
+--- a/node_modules/@dcl/ui-scene-utils/dist/ui-images/index.d.ts
++++ b/node_modules/@dcl/ui-scene-utils/dist/ui-images/index.d.ts
+@@ -1,4 +1,4 @@
+-/// <reference types="dcl" />
++import { Entity, UICanvas, UIImage } from 'decentraland-ecs';
+ import { ImageSection } from '../utils/types';
+ /**
+  * Displays an icon of 64x64 on the bottom-left corner
+diff --git a/node_modules/@dcl/ui-scene-utils/dist/utils/default-ui-components.d.ts b/node_modules/@dcl/ui-scene-utils/dist/utils/default-ui-components.d.ts
+index 6035431..c237472 100644
+--- a/node_modules/@dcl/ui-scene-utils/dist/utils/default-ui-components.d.ts
++++ b/node_modules/@dcl/ui-scene-utils/dist/utils/default-ui-components.d.ts
+@@ -1,4 +1,4 @@
+-/// <reference types="dcl" />
++import { Font, Texture, UICanvas, UIImage, UIText } from 'decentraland-ecs';
+ export declare const canvas: UICanvas;
+ export declare let SFFont: Font;
+ export declare let SFHeavyFont: Font;
+diff --git a/node_modules/@dcl/ui-scene-utils/dist/utils/resources.d.ts b/node_modules/@dcl/ui-scene-utils/dist/utils/resources.d.ts
+index 22c7866..c57efc6 100644
+--- a/node_modules/@dcl/ui-scene-utils/dist/utils/resources.d.ts
++++ b/node_modules/@dcl/ui-scene-utils/dist/utils/resources.d.ts
+@@ -1,4 +1,4 @@
+-/// <reference types="dcl" />
++import { UIImage } from 'decentraland-ecs';
+ import { ImageSection } from './types';
+ declare const _default: {
+     buttons: {
+diff --git a/node_modules/@dcl/ui-scene-utils/dist/utils/timerComponents.d.ts b/node_modules/@dcl/ui-scene-utils/dist/utils/timerComponents.d.ts
+index 7b4d0f3..90f7a8e 100644
+--- a/node_modules/@dcl/ui-scene-utils/dist/utils/timerComponents.d.ts
++++ b/node_modules/@dcl/ui-scene-utils/dist/utils/timerComponents.d.ts
+@@ -1,4 +1,4 @@
+-/// <reference types="dcl" />
++import { IEntity, ISystem } from 'decentraland-ecs';
+ export interface ITimerComponent {
+     elapsedTime: number;
+     targetTime: number;

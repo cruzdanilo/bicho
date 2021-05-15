@@ -4,7 +4,9 @@
     "module": "CommonJS",
     "noEmit": true,
     "esModuleInterop": true,
+    "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
+    "lib": ["ESNext"],
   },
   "include": ["ecs/**/*.ts"]
 }

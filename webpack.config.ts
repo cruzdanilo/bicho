@@ -11,11 +11,11 @@ function config(_: any, { mode = 'production' }): Configuration {
     entry: './ecs/main.ts',
     resolve: { extensions: ['.ts', '.js'] },
     devtool: isDevelopment && 'eval',
-    output: { clean: true },
-    cache: { type: 'filesystem', buildDependencies: { config: [__filename] } },
+    output: { publicPath: 'dist/', clean: true },
     module: {
       rules: [
         { test: /\.(ts|js)$/, use: 'babel-loader' },
+        { test: /\.(gltf)$/, type: 'asset' },
       ],
     },
     plugins: [

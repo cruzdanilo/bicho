@@ -1,0 +1,11 @@
+diff --git a/node_modules/@dcl/ecs-scene-utils/dist/index.d.ts b/node_modules/@dcl/ecs-scene-utils/dist/index.d.ts
+index 8ab2974..e49c6f8 100644
+--- a/node_modules/@dcl/ecs-scene-utils/dist/index.d.ts
++++ b/node_modules/@dcl/ecs-scene-utils/dist/index.d.ts
+@@ -1,5 +1,4 @@
+-/// <reference types="dcl" />
+-/// <reference types="env" />
++import { Color3, ComponentConstructor, Entity, IEntity, ISystem, Quaternion, ReadOnlyQuaternion, ReadOnlyVector3, TranformConstructorArgs, Transform, Vector3 } from 'decentraland-ecs';
+ 
+ /**
+  * @public

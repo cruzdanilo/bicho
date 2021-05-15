@@ -1,0 +1,13 @@
+diff --git a/node_modules/decentraland-ecs/dist/index.d.ts b/node_modules/decentraland-ecs/dist/index.d.ts
+index d1be38b..e130e49 100644
+--- a/node_modules/decentraland-ecs/dist/index.d.ts
++++ b/node_modules/decentraland-ecs/dist/index.d.ts
+@@ -4427,7 +4427,7 @@ export declare enum Space {
+ export declare class SphereShape extends Shape {
+ }
+ 
+-declare class Subscription {
++export declare class Subscription {
+     fn: (e: LocalActionButtonEvent) => void;
+     useRaycast: boolean;
+     constructor(fn: (e: LocalActionButtonEvent) => void, useRaycast: boolean);
