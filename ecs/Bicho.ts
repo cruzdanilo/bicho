@@ -1,3 +1,4 @@
+/// <reference path="assets.d.ts"/>
 import { TransformConstructorArgs } from 'decentraland-ecs';
 import { NPC, NPCData } from '@dcl/npc-scene-utils';
 import placeholder from './models/placeholder.gltf';
