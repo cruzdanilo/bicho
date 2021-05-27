@@ -1,8 +1,8 @@
 diff --git a/node_modules/decentraland-ecs/dist/index.d.ts b/node_modules/decentraland-ecs/dist/index.d.ts
-index d1be38b..e130e49 100644
+index a9406b8..0aebbf3 100644
 --- a/node_modules/decentraland-ecs/dist/index.d.ts
 +++ b/node_modules/decentraland-ecs/dist/index.d.ts
-@@ -4427,7 +4427,7 @@ export declare enum Space {
+@@ -4543,7 +4543,7 @@ export declare enum Space {
  export declare class SphereShape extends Shape {
  }
  
