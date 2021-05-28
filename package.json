@@ -15,9 +15,6 @@
     "start": "run-p start:**",
     "start:dcl": "rimraf dist/main.js && wait-on dist/main.js && dcl start",
     "start:build": "cross-env TS_NODE_PROJECT=tsconfig.tools.json webpack --mode development --watch",
-    "ci:start": "npm run prestart && run-p ci:start:*",
-    "ci:start:dcl": "npm run start:dcl -- --ci",
-    "ci:start:build": "npm run start:build",
     "build": "cross-env TS_NODE_PROJECT=tsconfig.tools.json webpack --mode production",
     "lint": "run-s --continue-on-error lint:**",
     "lint:es": "eslint --ext .ts,.js --ignore-path .gitignore .",
@@ -41,7 +38,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",
-    "@babel/preset-env": "^7.14.2",
+    "@babel/preset-env": "^7.14.4",
     "@babel/preset-typescript": "^7.13.0",
     "@types/babel__core": "^7.1.14",
     "@types/chai": "^4.2.18",
@@ -71,7 +68,7 @@
     "ts-node": "^10.0.0",
     "typescript": "^4.3.2",
     "wait-on": "^5.3.0",
-    "webpack": "^5.38.0",
+    "webpack": "^5.38.1",
     "webpack-cli": "^4.7.0"
   },
   "resolutions": {
