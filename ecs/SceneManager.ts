@@ -1,91 +1,75 @@
 import {
-  ISystem, Transform, UICanvas, engine,
+  DecentralandInterface,
+  EngineEvent,
+  IEngine,
+  ISystem,
+  MessageBus,
 } from 'decentraland-ecs';
-import TicketMenu from './TicketMenu';
-import BichoMenu from './BichoMenu';
-import BancaModel from './BancaModel';
-import BichoModel from './BichoModel';
+import Bicho from './Bicho';
+import getUserBichos from './utils/getUserBichos';
+
+declare const dcl: DecentralandInterface;
+
+interface BaseEvent {
+  address: string;
+}
+
+interface BichoEvent extends BaseEvent {
+  id: number;
+}
 
 export default class SceneManager implements ISystem {
-  onBuyWishEvent: (bicho: number, ticket: number) => Promise<void>;
+  bus = new MessageBus();
 
-  bichoMenu: BichoMenu;
+  bichos = {} as Record<string, Record<number, Bicho>>;
 
-  group: any;
+  engine: IEngine;
 
-  ticketMenu: TicketMenu;
+  address: string;
 
-  showingMenu: boolean;
+  activate(engine: IEngine) {
+    this.engine = engine;
 
-  mainBanca: BancaModel;
+    dcl.subscribe('positionChanged');
+    dcl.subscribe('rotationChanged');
+    dcl.onEvent((event) => this.onDCLEvent(event));
 
-  onCloseMenu() {
-    this.showingMenu = false;
-  }
-
-  constructor(onBuyWishEvent: (bicho: number, ticket: number) => Promise<void>) {
-    this.onBuyWishEvent = onBuyWishEvent;
-    this.group = engine.getComponentGroup(Transform);
-    const ticketCanvas = new UICanvas();
-    const bichoCanvas = new UICanvas();
-
-    this.ticketMenu = new TicketMenu(ticketCanvas, (bicho: number, ticket: number) => {
-      this.showingMenu = false;
-      this.ticketMenu.visible = false;
-      this.onBuyWishEvent(bicho, ticket);
-      for (const entity of this.group.entities) {
-        if (entity instanceof BancaModel) {
-          (entity as BancaModel).setCountdown(2000);
-        }
-      }
-    });
-    this.ticketMenu.addOnClose(() => this.onCloseMenu());
-
-    this.bichoMenu = new BichoMenu(bichoCanvas, (bicho: number) => {
-      this.bichoMenu.visible = false;
-      this.ticketMenu.show(bicho);
-    });
-    this.bichoMenu.addOnClose(() => this.onCloseMenu());
-
-    this.showingMenu = false;
-  }
-
-  public start() {
-    engine.addSystem(this);
-  }
-
-  public spawnBicho(bicho: number, x: number = 0, y: number = 0, z: number = 0) {
-    const bichoModel = new BichoModel(bicho, x, y, z);
-    bichoModel.addOnBichoPicked((picked: BichoModel) => {
-      if (!this.showingMenu) {
-        this.showingMenu = true;
-        this.ticketMenu.show(picked.bicho);
-        this.ticketMenu.isPointerBlocker = true;
-      }
-    });
-
-    engine.addEntity(bichoModel);
-  }
-
-  public spawnBanca(x: number = 0, y: number = 0, z: number = 0) {
-    const banca = new BancaModel(x, y, z);
-    engine.addEntity(banca);
-    banca.addOnTicketWishBuy(() => {
-      if (!this.showingMenu) {
-        this.showingMenu = true;
-        this.bichoMenu.visible = true;
-        this.bichoMenu.isPointerBlocker = true;
-      }
+    this.bus.on('request', () => this.onRequest());
+    this.bus.on('bicho', ({ address, id }: BichoEvent) => this.onBicho(address, id));
+    this.bus.on('deactivate', ({ address }: BaseEvent) => this.onDeactivate(address));
+    this.bus.emit('request', null);
+    getUserBichos().then(({ address, bichos }) => {
+      this.address = address;
+      bichos.forEach((id) => this.bus.emit('bicho', { address, id } as BichoEvent));
     });
   }
 
-  update(dt: number) {
-    for (const entity of this.group.entities) {
-      // const transform = entity.getComponent(Transform);
-      // transform.rotate(Vector3.Up(), dt * 10);
-      if (entity instanceof BancaModel) {
-        (entity as BancaModel).update(dt);
-      }
-    }
+  deactivate() {
+    this.bus.emit('deactivate', { address: this.address });
+  }
+
+  onDCLEvent(event: EngineEvent) {
+    if (!this.bichos[this.address]) return;
+    Object.values(this.bichos[this.address]).forEach((bicho) => bicho.onDCLEvent(event));
+  }
+
+  onBicho(address: string, id: number) {
+    this.bichos[address] ??= {};
+    if (this.bichos[address][id]) return;
+    const bicho = new Bicho(address, id, this.bus, {}, address !== this.address);
+    this.engine.addEntity(bicho);
+    this.bichos[address][id] = bicho;
+  }
+
+  onRequest() {
+    if (!this.address || !this.bichos[this.address]) return;
+    Object.keys(this.bichos[this.address]).forEach((id) => this.bus.emit('bicho',
+      { address: this.address, id: Number(id) } as BichoEvent));
+  }
+
+  onDeactivate(address: string) {
+    if (!this.bichos[address]) return;
+    Object.values(this.bichos[address]).forEach((bicho) => this.engine.removeEntity(bicho));
+    delete this.bichos[address];
   }
 }
