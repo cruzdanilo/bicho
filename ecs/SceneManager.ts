@@ -5,8 +5,9 @@ import {
   ISystem,
   MessageBus,
 } from 'decentraland-ecs';
-import Bicho from './Bicho';
-import getUserBichos from './utils/getUserBichos';
+import Bicho, { BichoType } from './Bicho';
+import getUserAddress from './web3/getUserAddress';
+import getUserBichos from './web3/getUserBichos';
 
 declare const dcl: DecentralandInterface;
 
@@ -15,13 +16,13 @@ interface BaseEvent {
 }
 
 interface BichoEvent extends BaseEvent {
-  id: number;
+  type: BichoType;
 }
 
 export default class SceneManager implements ISystem {
   bus = new MessageBus();
 
-  bichos = {} as Record<string, Record<number, Bicho>>;
+  bichos: { [address: string]: { [T in BichoType]?: Bicho } } = {};
 
   engine: IEngine;
 
@@ -35,12 +36,12 @@ export default class SceneManager implements ISystem {
     dcl.onEvent((event) => this.onDCLEvent(event));
 
     this.bus.on('request', () => this.onRequest());
-    this.bus.on('bicho', ({ address, id }: BichoEvent) => this.onBicho(address, id));
+    this.bus.on('bicho', ({ address, type }: BichoEvent) => this.onBicho(address, type));
     this.bus.on('deactivate', ({ address }: BaseEvent) => this.onDeactivate(address));
     this.bus.emit('request', null);
-    getUserBichos().then(({ address, bichos }) => {
+    Promise.all([getUserAddress(), getUserBichos()]).then(([address, bichos]) => {
       this.address = address;
-      bichos.forEach((id) => this.bus.emit('bicho', { address, id } as BichoEvent));
+      bichos?.forEach((type) => this.bus.emit('bicho', { address, type } as BichoEvent));
     });
   }
 
@@ -53,18 +54,18 @@ export default class SceneManager implements ISystem {
     Object.values(this.bichos[this.address]).forEach((bicho) => bicho.onDCLEvent(event));
   }
 
-  onBicho(address: string, id: number) {
+  onBicho(address: string, type: BichoType) {
     this.bichos[address] ??= {};
-    if (this.bichos[address][id]) return;
-    const bicho = new Bicho(address, id, this.bus, {}, address !== this.address);
+    if (this.bichos[address][type]) return;
+    const bicho = new Bicho(address, type, this.bus, {}, address !== this.address);
     this.engine.addEntity(bicho);
-    this.bichos[address][id] = bicho;
+    this.bichos[address][type] = bicho;
   }
 
   onRequest() {
     if (!this.address || !this.bichos[this.address]) return;
-    Object.keys(this.bichos[this.address]).forEach((id) => this.bus.emit('bicho',
-      { address: this.address, id: Number(id) } as BichoEvent));
+    Object.keys(this.bichos[this.address]).forEach((type) => this.bus.emit('bicho',
+      { address: this.address, type: Number(type) } as BichoEvent));
   }
 
   onDeactivate(address: string) {
