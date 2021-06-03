@@ -15,7 +15,7 @@ function config(_: any, { mode = 'production' }): Configuration {
     module: {
       rules: [
         { test: /\.(ts|js)$/, loader: 'babel-loader', options: { sourceMaps: isDevelopment } },
-        { test: /\.(gltf)$/, type: 'asset' },
+        { test: /\.(png|jpg|gltf)$/, type: 'asset' },
       ],
     },
     plugins: [
