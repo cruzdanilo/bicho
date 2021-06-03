@@ -6,12 +6,9 @@ import {
   ReadOnlyVector3,
   Transform,
   TransformConstructorArgs,
-  Vector3,
 } from 'decentraland-ecs';
 import { NPC } from '@dcl/npc-scene-utils';
 import placeholder from './models/placeholder.gltf';
-
-const DEFAULT_SCALE = new Vector3(0.01, 0.01, 0.01);
 
 interface UpdateEvent {
   position?: ReadOnlyVector3;
@@ -35,10 +32,10 @@ export default class Bicho extends NPC {
     address: string,
     id: number,
     bus: MessageBus,
-    { position, rotation, scale }: TransformConstructorArgs = {},
+    transformArgs: TransformConstructorArgs,
     remote = false,
   ) {
-    super({ position, rotation, scale: scale ?? DEFAULT_SCALE }, placeholder, () => {});
+    super(transformArgs, placeholder, () => {});
     this.address = address;
     this.id = id;
     this.bus = bus;
