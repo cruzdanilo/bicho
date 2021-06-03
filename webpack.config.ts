@@ -10,11 +10,11 @@ function config(_: any, { mode = 'production' }): Configuration {
   return {
     entry: './ecs/main.ts',
     resolve: { extensions: ['.ts', '.js'] },
-    devtool: isDevelopment && 'eval',
+    devtool: isDevelopment && 'eval-cheap-module-source-map',
     output: { publicPath: 'dist/', clean: true },
     module: {
       rules: [
-        { test: /\.(ts|js)$/, use: 'babel-loader' },
+        { test: /\.(ts|js)$/, loader: 'babel-loader', options: { sourceMaps: isDevelopment } },
         { test: /\.(gltf)$/, type: 'asset' },
       ],
     },
