@@ -4,7 +4,9 @@ import {
   IEngine,
   ISystem,
   MessageBus,
+  Vector3,
 } from 'decentraland-ecs';
+import Banca from './Banca';
 import Bicho, { BichoType } from './Bicho';
 import getUserAddress from './web3/getUserAddress';
 import getUserBichos from './web3/getUserBichos';
@@ -43,6 +45,8 @@ export default class SceneManager implements ISystem {
       this.address = address;
       bichos?.forEach((type) => this.bus.emit('bicho', { address, type } as BichoEvent));
     });
+
+    this.engine.addEntity(new Banca({ position: new Vector3(8, 1, 8) }));
   }
 
   deactivate() {
