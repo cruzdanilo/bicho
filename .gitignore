@@ -6,6 +6,7 @@ build/
 cache/
 export/
 node_modules/
+abi/types/
 .DS_Store
 .env
 Thumbs.db
