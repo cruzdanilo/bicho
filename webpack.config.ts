@@ -14,7 +14,7 @@ function config(_: any, { mode = 'production' }): Configuration {
     output: { publicPath: 'dist/', clean: true },
     module: {
       rules: [
-        { test: /\.(ts|js)$/, loader: 'babel-loader', options: { sourceMaps: isDevelopment } },
+        { test: /\.(ts|js)$/, exclude: /node_modules/, loader: 'babel-loader' },
         { test: /\.(png|jpg|gltf)$/, type: 'asset' },
       ],
     },
