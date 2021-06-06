@@ -45,20 +45,18 @@ export enum BichoType {
 }
 
 export default class Bicho extends NPC {
-  static contract: any;
+  readonly owner: string;
 
-  address: string;
+  readonly type: BichoType;
 
-  type: BichoType;
+  readonly remote: boolean;
 
-  bus: MessageBus;
+  protected bus: MessageBus;
 
-  remote: boolean;
-
-  eventId: string;
+  protected eventId: string;
 
   constructor(
-    address: string,
+    owner: string,
     type: BichoType,
     bus: MessageBus,
     transformArgs: TransformConstructorArgs,
@@ -66,11 +64,11 @@ export default class Bicho extends NPC {
   ) {
     super(transformArgs, placeholder, () => {},
       { onlyClickTrigger: true, onlyETrigger: true, walkingAnim: 'Walk' });
-    this.address = address;
+    this.owner = owner;
     this.type = type;
-    this.bus = bus;
     this.remote = remote;
-    this.eventId = `${this.address}[${this.type}]`;
+    this.bus = bus;
+    this.eventId = `${this.owner}[${this.type}]`;
     this.bus.on(this.eventId, (value) => this.update(value));
   }
 
@@ -79,7 +77,6 @@ export default class Bicho extends NPC {
   }
 
   update({ position, rotation }: UpdateEvent) {
-    if (!this.remote) this.bus.emit('bicho', { address: this.address, type: this.type });
     const transform = this.getComponent(Transform);
     if (rotation) transform.rotation.setEuler(0, rotation.y, 0);
     if (position) {
