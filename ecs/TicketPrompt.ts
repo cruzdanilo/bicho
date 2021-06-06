@@ -56,6 +56,8 @@ class TicketPrompt extends CustomPrompt {
       IMAGE_WIDTH * IMAGE_SCALE + 48, IMAGE_HEIGHT * IMAGE_SCALE + BAR_HEIGHT + 48);
 
     this.result = this.addText(null, 0, CONTENT_Y);
+    this.result.text.width = IMAGE_WIDTH * IMAGE_SCALE;
+    this.result.text.textWrapping = true;
     this.groups[State.Result] = [this.result,
       this.addButton('OK', 0, BAR_Y, () => this.hide(), ButtonStyles.RED)];
 
@@ -120,7 +122,7 @@ class TicketPrompt extends CustomPrompt {
       let nonce = await signer.getTransactionCount();
       await Promise.all(this.bichos.map(async (checkbox, i) => {
         if (!checkbox.checked) return;
-        await writableContract.bet(i, { nonce: ++nonce });
+        await writableContract.bet(i, { value: 1, nonce: ++nonce });
       }));
       this.hide();
     } catch ({ code, message }) {
