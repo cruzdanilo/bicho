@@ -7,12 +7,12 @@ declare const BICHO_ADDRESS: string;
 
 let contract: Promise<BichoContract>;
 
-const getContract = async () => {
+const createContract = async () => {
   const provider = await getProvider();
   return new Contract(BICHO_ADDRESS, BichoABI, provider) as BichoContract;
 };
 
 export default async () => {
-  contract ??= getContract();
+  contract ??= createContract();
   return contract;
 };

@@ -1,15 +1,15 @@
 import { JsonRpcSigner } from '@ethersproject/providers';
+import { getUserPublicKey } from '../@decentraland/Identity';
 import getProvider from './getProvider';
-import getUserAddress from './getUserAddress';
 
 let signer: Promise<JsonRpcSigner>;
 
-const getSigner = async () => {
-  const [address, provider] = await Promise.all([getUserAddress(), getProvider()]);
+const createSigner = async () => {
+  const [address, provider] = await Promise.all([getUserPublicKey(), getProvider()]);
   return address && provider.getUncheckedSigner(address);
 };
 
 export default async () => {
-  signer ??= getSigner();
+  signer ??= createSigner();
   return signer;
 };

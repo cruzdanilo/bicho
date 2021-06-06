@@ -6,7 +6,9 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
-    "lib": ["ESNext", "DOM"]
+    "experimentalDecorators": true,
+    "lib": ["ESNext", "DOM"],
+    "paths": { "@decentraland/*": ["./ecs/@decentraland/*"] }
   },
   "include": ["ecs/**/*.ts"]
 }

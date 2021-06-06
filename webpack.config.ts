@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import { resolve } from 'path';
 import { Configuration, DefinePlugin, ProvidePlugin } from 'webpack';
 
 const {
@@ -9,9 +10,12 @@ function config(_: any, { mode = 'production' }): Configuration {
   const isDevelopment = mode === 'development';
   return {
     entry: './ecs/main.ts',
-    resolve: { extensions: ['.ts', '.js'] },
     devtool: isDevelopment && 'eval-cheap-module-source-map',
     output: { publicPath: 'dist/', clean: true },
+    resolve: {
+      extensions: ['.ts', '.js'],
+      alias: { '@decentraland': resolve(__dirname, 'ecs/@decentraland') },
+    },
     module: {
       rules: [
         { test: /\.(ts|js)$/, exclude: /node_modules/, loader: 'babel-loader' },

@@ -1,9 +1,9 @@
+import { getUserPublicKey } from '../@decentraland/Identity';
 import { BichoType } from '../Bicho';
 import getBichoContract from './getBichoContract';
-import getUserAddress from './getUserAddress';
 
 export default async () => {
-  const [address, contract] = await Promise.all([getUserAddress(), getBichoContract()]);
+  const [address, contract] = await Promise.all([getUserPublicKey(), getBichoContract()]);
   if (!address) return null;
   const balances = await contract.balanceOfBatch(
     Array(25).fill(address),

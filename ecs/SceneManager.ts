@@ -6,9 +6,9 @@ import {
   MessageBus,
   Vector3,
 } from 'decentraland-ecs';
+import { getUserPublicKey } from './@decentraland/Identity';
 import Banca from './Banca';
 import Bicho, { BichoType } from './Bicho';
-import getUserAddress from './web3/getUserAddress';
 import getUserBichos from './web3/getUserBichos';
 
 declare const dcl: DecentralandInterface;
@@ -41,7 +41,7 @@ export default class SceneManager implements ISystem {
     this.bus.on('bicho', ({ address, type }: BichoEvent) => this.onBicho(address, type));
     this.bus.on('deactivate', ({ address }: BaseEvent) => this.onDeactivate(address));
     this.bus.emit('request', null);
-    Promise.all([getUserAddress(), getUserBichos()]).then(([address, bichos]) => {
+    Promise.all([getUserPublicKey(), getUserBichos()]).then(([address, bichos]) => {
       this.address = address;
       bichos?.forEach((type) => this.bus.emit('bicho', { address, type } as BichoEvent));
     });

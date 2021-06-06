@@ -8,13 +8,12 @@ import {
   LoadingIcon,
   PromptStyles,
 } from '@dcl/ui-scene-utils';
-import { DecentralandInterface, Entity } from 'decentraland-ecs';
+import { Entity } from 'decentraland-ecs';
+import { isPreviewMode } from './@decentraland/EnvironmentAPI';
 import { BichoType } from './Bicho';
 import image from './images/ticket.jpg';
 import getBichoContract from './web3/getBichoContract';
 import getSigner from './web3/getSigner';
-
-declare const dcl: DecentralandInterface;
 
 const IMAGE_SCALE = 2 / 3;
 const IMAGE_WIDTH = 580 - 13 - 13;
@@ -50,6 +49,8 @@ class TicketPrompt extends CustomPrompt {
 
   protected groups: { [S in State]?: CustomPromptElement[] } = {};
 
+  protected devMode;
+
   constructor() {
     super(PromptStyles.LIGHT,
       IMAGE_WIDTH * IMAGE_SCALE + 48, IMAGE_HEIGHT * IMAGE_SCALE + BAR_HEIGHT + 48);
@@ -78,7 +79,7 @@ class TicketPrompt extends CustomPrompt {
         xOffset - 38 * IMAGE_SCALE,
         yOffset - 33 * IMAGE_SCALE,
         () => {
-          if (!dcl.DEBUG) this.bichos.forEach((checkbox, j) => i !== j && checkbox.uncheck());
+          if (!this.devMode) this.bichos.forEach((checkbox, j) => i !== j && checkbox.uncheck());
           this.submitButton.enable();
         },
         () => this.submitButton.grayOut(),
@@ -87,6 +88,8 @@ class TicketPrompt extends CustomPrompt {
     this.groups[State.Bet] = [ticket, cancelButton, this.submitButton, ...this.bichos];
 
     this.hide();
+
+    isPreviewMode().then((value) => { this.devMode = value; });
   }
 
   reset() {
