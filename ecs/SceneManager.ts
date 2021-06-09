@@ -46,7 +46,7 @@ export default class SceneManager implements ISystem {
       bichos?.forEach((type) => this.bus.emit('bicho', { address, type } as BichoEvent));
     });
 
-    this.engine.addEntity(new Banca({ position: new Vector3(8, 1, 8) }));
+    this.engine.addEntity(new Banca({ position: new Vector3(8, 0, 8) }));
   }
 
   deactivate() {
